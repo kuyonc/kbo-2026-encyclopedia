@@ -1,0 +1,1049 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KBO 2026 시즌 백과사전</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090f;--bg2:#0d111b;--panel:#121827;--panel2:#182036;--line:#25304a;
+  --tx:#e9edf7;--mut:#8f9ab5;
+  --yellow:#ffd60a;--red:#ff2e4d;--blue:#27a4ff;
+  --tc:#ffd60a;
+  --ff-disp:'Black Han Sans','Noto Sans KR',sans-serif;
+  --ff:'Noto Sans KR',system-ui,-apple-system,sans-serif;
+  --nav-h:56px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 12px)}
+body{background:var(--bg);color:var(--tx);font-family:var(--ff);line-height:1.7;overflow-x:hidden;
+  background-image:radial-gradient(1200px 600px at 80% -10%,rgba(39,164,255,.08),transparent),radial-gradient(900px 500px at -10% 30%,rgba(255,46,77,.06),transparent)}
+a{color:var(--blue)}
+::selection{background:var(--yellow);color:#000}
+
+/* HERO */
+.hero{position:relative;min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:80px 6vw 140px;overflow:hidden;isolation:isolate;
+  clip-path:polygon(0 0,100% 0,100% 90%,0 100%)}
+.hero svg.speed{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.speed line{stroke-linecap:round;animation:zoom linear infinite}
+@keyframes zoom{from{transform:translateX(120%)}to{transform:translateX(-160%)}}
+.ball{position:absolute;right:6vw;top:50%;width:min(36vw,380px);aspect-ratio:1;transform:translateY(-50%);z-index:-1;opacity:.95;filter:drop-shadow(0 0 40px rgba(255,214,10,.25))}
+.ball .spin{transform-origin:50% 50%;animation:spin 14s linear infinite}
+.ball .stitch{stroke-dasharray:6 7;animation:dash 3s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes dash{to{stroke-dashoffset:-52}}
+.live{display:inline-flex;align-items:center;gap:8px;font-weight:900;letter-spacing:.2em;font-size:.8rem;color:#fff;background:var(--red);padding:4px 12px;transform:skewX(-12deg);width:max-content}
+.live::before{content:"";width:8px;height:8px;border-radius:50%;background:#fff;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.2}}
+.hero h1{font-family:var(--ff-disp);font-weight:400;font-size:clamp(3.4rem,13vw,10rem);line-height:.95;margin:18px 0 8px;letter-spacing:-.02em;text-transform:uppercase}
+.hero h1 .y{color:var(--yellow);text-shadow:0 0 28px rgba(255,214,10,.55)}
+.hero h1 .o{-webkit-text-stroke:2px var(--tx);color:transparent}
+.hero h1 span{display:inline-block;animation:slam .9s cubic-bezier(.2,1.4,.4,1) both}
+.hero h1 span:nth-child(2){animation-delay:.12s}
+.hero h1 span:nth-child(3){animation-delay:.24s}
+@keyframes slam{from{opacity:0;transform:translateX(-80px) skewX(-18deg)}to{opacity:1;transform:none}}
+.hero .sub{font-size:clamp(1rem,2.2vw,1.35rem);color:var(--mut);max-width:620px;margin-bottom:36px}
+.hero .sub b{color:var(--yellow)}
+.scoreboard{display:flex;flex-wrap:wrap;gap:14px}
+.scoreboard .stat{min-width:130px}
+
+/* NAV */
+nav.top{position:sticky;top:0;z-index:50;height:var(--nav-h);display:flex;align-items:center;gap:6px;padding:0 4vw;background:rgba(7,9,15,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav.top .logo{font-family:var(--ff-disp);color:var(--yellow);font-size:1.25rem;margin-right:12px;white-space:nowrap;text-decoration:none}
+nav.top .links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1}
+nav.top .links::-webkit-scrollbar{display:none}
+nav.top .links a{color:var(--mut);text-decoration:none;font-weight:700;font-size:.9rem;padding:8px 14px;white-space:nowrap;position:relative;transition:color .2s}
+nav.top .links a::after{content:"";position:absolute;left:14px;right:14px;bottom:2px;height:3px;background:var(--yellow);transform:scaleX(0) skewX(-20deg);transition:transform .25s;box-shadow:0 0 10px var(--yellow)}
+nav.top .links a:hover{color:var(--tx)}
+nav.top .links a.on{color:var(--yellow)}
+nav.top .links a.on::after{transform:scaleX(1) skewX(-20deg)}
+.search{position:relative;flex:0 0 auto}
+.search input{background:var(--panel);border:1px solid var(--line);color:var(--tx);border-radius:999px;padding:8px 16px 8px 36px;width:200px;font:inherit;font-size:.85rem;outline:none;transition:.25s}
+.search input:focus{border-color:var(--yellow);box-shadow:0 0 0 3px rgba(255,214,10,.18);width:260px}
+.search::before{content:"⌕";position:absolute;left:13px;top:50%;transform:translateY(-52%);color:var(--mut);font-size:1.05rem}
+#sCount{position:fixed;bottom:18px;right:18px;z-index:60;background:var(--yellow);color:#000;font-weight:900;padding:6px 14px;transform:skewX(-10deg);display:none;box-shadow:0 6px 24px rgba(0,0,0,.5)}
+.hide{display:none!important}
+.hit mark{background:var(--yellow);color:#000;padding:0 2px}
+
+/* SECTIONS */
+main{position:relative}
+.sec{position:relative;padding:110px 6vw 110px;max-width:1280px;margin:0 auto}
+.sec::before{content:"";position:absolute;top:0;left:50%;width:100vw;height:100%;transform:translateX(-50%);z-index:-1;
+  background:linear-gradient(180deg,var(--bg2),var(--bg));clip-path:polygon(0 36px,100% 0,100% calc(100% - 36px),0 100%);opacity:.0}
+.sec:nth-of-type(odd)::before{opacity:1}
+.sec-title{font-family:var(--ff-disp);font-weight:400;font-size:clamp(2rem,6vw,4rem);line-height:1.1;display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:10px}
+.sec-title .no{font-family:var(--ff-disp);font-size:.5em;color:#000;background:var(--yellow);padding:2px 14px;transform:skewX(-14deg);display:inline-block;box-shadow:5px 5px 0 var(--red)}
+.sec-title::after{content:"";flex:1 1 80px;min-width:60px;height:4px;background:repeating-linear-gradient(115deg,var(--yellow) 0 12px,transparent 12px 20px);align-self:center;opacity:.6}
+.lead{color:var(--mut);font-size:1.08rem;max-width:760px;margin-bottom:38px}
+.lead b,.lead strong{color:var(--tx)}
+h3{font-family:var(--ff-disp);font-weight:400;font-size:1.5rem;margin:40px 0 14px;color:var(--yellow)}
+h4{font-weight:900;margin:18px 0 6px}
+p{margin-bottom:12px}
+ul,ol{margin:0 0 14px 1.3em}
+
+/* GRID */
+.grid{display:grid;gap:18px;margin:18px 0}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+/* CARD */
+.card{position:relative;background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:6px;padding:26px 22px 20px;overflow:hidden;transition:transform .3s cubic-bezier(.2,.9,.3,1.3),border-color .25s,box-shadow .3s}
+.card::before{content:"";position:absolute;left:0;top:0;right:0;height:5px;background:var(--tc);box-shadow:0 0 18px var(--tc)}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.07) 50%,transparent 60%);transform:translateX(-120%);transition:transform .7s}
+.card:hover{transform:translateY(-6px) rotate(-.4deg);border-color:var(--tc);box-shadow:0 14px 40px rgba(0,0,0,.55),0 0 0 1px var(--tc)}
+.card:hover::after{transform:translateX(120%)}
+.card h3,.card h4{margin-top:0;color:var(--tx)}
+.card h3{font-size:1.35rem}
+.card p:last-child,.card ul:last-child{margin-bottom:0}
+
+/* STAT */
+.stat{background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--yellow);padding:14px 18px;display:flex;flex-direction:column;gap:2px;transition:.25s}
+.stat:hover{border-left-color:var(--red);transform:translateX(4px)}
+.stat .num{font-family:var(--ff-disp);font-size:clamp(2rem,4vw,2.9rem);line-height:1.1;color:var(--yellow);text-shadow:0 0 18px rgba(255,214,10,.4);font-variant-numeric:tabular-nums}
+.stat small,.stat .lbl{font-size:.8rem;color:var(--mut);font-weight:700;letter-spacing:.04em}
+.num{font-variant-numeric:tabular-nums}
+
+/* TABLE */
+.tblwrap{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+table.tbl{width:100%;border-collapse:collapse;font-size:.92rem;min-width:520px}
+table.tbl th{position:sticky;top:0;background:#0a0f1c;color:var(--yellow);text-align:left;font-weight:900;padding:12px 14px;border-bottom:2px solid var(--yellow);white-space:nowrap;font-size:.82rem;letter-spacing:.05em}
+table.tbl td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+table.tbl tbody tr{transition:background .2s}
+table.tbl tbody tr:nth-child(even){background:rgba(255,255,255,.025)}
+table.tbl tbody tr:hover{background:rgba(255,214,10,.09);box-shadow:inset 4px 0 0 var(--yellow)}
+table.tbl td.n,table.tbl td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+table.tbl:not(.wrapped){}
+/* tables placed directly in a section scroll on small screens */
+.sec>table.tbl,.card>table.tbl{display:block;overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+
+/* TAG / BADGE */
+.tag{display:inline-block;font-size:.74rem;font-weight:900;padding:2px 10px;margin:0 4px 4px 0;background:color-mix(in srgb,var(--tc) 22%,transparent);color:#fff;border:1px solid var(--tc);border-radius:3px;transform:skewX(-8deg);letter-spacing:.02em}
+.badge{display:inline-block;font-size:.72rem;font-weight:900;padding:2px 9px;background:var(--red);color:#fff;border-radius:999px;vertical-align:middle;margin-left:4px;box-shadow:0 0 12px rgba(255,46,77,.5)}
+.badge.y{background:var(--yellow);color:#000;box-shadow:0 0 12px rgba(255,214,10,.5)}
+.badge.b{background:var(--blue);color:#001a2e;box-shadow:0 0 12px rgba(39,164,255,.5)}
+
+/* TIMELINE */
+.timeline{position:relative;margin:26px 0 26px 14px;padding-left:34px;border-left:3px solid var(--line)}
+.timeline::before{content:"";position:absolute;left:-3px;top:0;width:3px;height:var(--prog,0%);background:linear-gradient(var(--yellow),var(--red));box-shadow:0 0 12px var(--yellow);transition:height .2s}
+.tl-item{position:relative;padding:4px 0 26px}
+.tl-item::before{content:"";position:absolute;left:-44px;top:10px;width:18px;height:18px;background:var(--bg);border:3px solid var(--yellow);transform:rotate(45deg);transition:.3s}
+.tl-item:hover::before{background:var(--yellow);box-shadow:0 0 16px var(--yellow)}
+.tl-item .yr,.tl-item time,.tl-item>b:first-child,.tl-item>strong:first-child{font-family:var(--ff-disp);color:var(--yellow);font-size:1.3rem;font-weight:400;margin-right:8px}
+.tl-item h4{margin:0 0 4px}
+
+/* QUOTE / NOTE */
+.quote{position:relative;margin:26px 0;padding:22px 26px 22px 64px;background:var(--panel);border-left:6px solid var(--red);font-size:1.12rem;font-weight:500;font-style:italic;clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%)}
+.quote::before{content:"“";position:absolute;left:16px;top:-6px;font-family:var(--ff-disp);font-size:4.4rem;color:var(--red);line-height:1;font-style:normal}
+.quote cite,.quote footer{display:block;margin-top:8px;font-size:.85rem;color:var(--mut);font-style:normal}
+.note{margin:22px 0;padding:14px 18px 14px 50px;background:rgba(39,164,255,.08);border:1px solid rgba(39,164,255,.4);border-left:5px solid var(--blue);border-radius:4px;position:relative;font-size:.95rem}
+.note::before{content:"i";position:absolute;left:14px;top:14px;width:24px;height:24px;border-radius:50%;background:var(--blue);color:#001a2e;font-weight:900;display:grid;place-items:center;font-family:serif;font-style:italic}
+
+/* TEAM CLASSES */
+.t-lg{--tc:#e0287a}
+.t-hanwha{--tc:#ff6a13}
+.t-ssg{--tc:#ea1d3c}
+.t-samsung{--tc:#2a7de1}
+.t-nc{--tc:#4a78c2}
+.t-kt{--tc:#f0242d}
+.t-lotte{--tc:#e8143a}
+.t-kia{--tc:#ff2b3d}
+.t-doosan{--tc:#5459c9}
+.t-kiwoom{--tc:#b3223f}
+.t-lg.tag,.t-hanwha.tag,.t-ssg.tag,.t-samsung.tag,.t-nc.tag,.t-kt.tag,.t-lotte.tag,.t-kia.tag,.t-doosan.tag,.t-kiwoom.tag{background:var(--tc);color:#fff}
+tr[class^="t-"] td:first-child{box-shadow:inset 4px 0 0 var(--tc)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(34px) skewY(1.2deg);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.9,.3,1)}
+.rv.in{opacity:1;transform:none}
+
+/* FOOTER / TOP */
+footer.foot{text-align:center;color:var(--mut);padding:60px 6vw 90px;font-size:.85rem;border-top:1px solid var(--line);background:var(--bg2)}
+#toTop{position:fixed;left:18px;bottom:18px;z-index:55;width:46px;height:46px;border:0;background:var(--yellow);color:#000;font-weight:900;font-size:1.2rem;cursor:pointer;transform:skewX(-10deg) translateY(80px);transition:.3s;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+#toTop.show{transform:skewX(-10deg)}
+#toTop:hover{background:var(--red);color:#fff}
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--yellow),var(--red),var(--blue));z-index:70;box-shadow:0 0 10px var(--yellow)}
+
+/* RESPONSIVE */
+@media(max-width:1000px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}.ball{opacity:.25;right:-8vw}}
+@media(max-width:680px){
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  nav.top .logo{display:none}
+  .search input,.search input:focus{width:130px}
+  .sec{padding:80px 5vw}
+  .hero{padding:60px 5vw 120px;min-height:80vh}
+  .scoreboard .stat{flex:1 1 calc(50% - 14px);min-width:0}
+  .quote{padding-left:54px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .rv{opacity:1;transform:none}
+}
+@media print{nav.top,#toTop,#sCount,#progress,.hero svg,.ball{display:none}.rv{opacity:1;transform:none}body{background:#fff;color:#000}}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+/* SPOTLIGHT */
+.feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:28px;align-items:center;margin:22px 0;padding:36px 34px 26px;background:repeating-linear-gradient(115deg,rgba(255,255,255,.035) 0 14px,transparent 14px 28px),linear-gradient(160deg,var(--panel2),var(--panel));clip-path:polygon(0 0,100% 0,100% calc(100% - 22px),calc(100% - 22px) 100%,0 100%)}
+.feature .big{display:flex;flex-direction:column;gap:6px}
+.feature .big .num{font-family:var(--ff-disp);font-size:clamp(2.6rem,7vw,5.2rem);line-height:1;color:var(--tc);text-shadow:0 0 28px var(--tc);word-break:keep-all}
+.feature .big small{color:var(--mut);font-weight:700;letter-spacing:.04em}
+.feature h3{font-size:clamp(1.4rem,3vw,2rem);margin:0 0 10px;color:var(--tx)}
+.feature .src,.card .src{display:block;margin-top:12px;font-size:.72rem;color:var(--mut);opacity:.8;line-height:1.5}
+.sp-kick{display:inline-block;font-size:.72rem;font-weight:900;letter-spacing:.14em;color:#000;background:var(--yellow);padding:2px 12px;margin-bottom:10px;transform:skewX(-12deg)}
+#spotlight .card .num{font-family:var(--ff-disp);font-size:2rem;color:var(--tc);display:block;line-height:1.2}
+#spotlight .card h3{font-size:1.15rem;margin:6px 0 8px}
+#spotlight .card p{font-size:.92rem;margin-bottom:6px}
+@media(max-width:680px){.feature{grid-template-columns:1fr;padding:28px 20px 22px}}
+#batters{--tc:#7c8cff}
+#batters .bt-kia{--tc:#ea0029}#batters .bt-ss{--tc:#1d6fd6}#batters .bt-lt{--tc:#e4002b}#batters .bt-kt{--tc:#d4d4d4}
+#batters .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+#batters .kpi{border:1px solid var(--tc);border-radius:12px;padding:14px;text-align:center;background:linear-gradient(160deg,color-mix(in srgb,var(--tc) 35%,transparent),transparent);box-shadow:0 0 14px color-mix(in srgb,var(--tc) 40%,transparent)}
+#batters .kpi b{display:block;font-size:2rem;line-height:1.1}
+#batters .kpi span{font-size:.85rem;opacity:.85}
+#batters .chart{display:grid;gap:8px;margin:8px 0 16px}
+#batters .brow{display:grid;grid-template-columns:3.2em 4.6em 1fr 3.6em;gap:8px;align-items:center;font-size:.9rem}
+#batters .bn{opacity:.7}
+#batters .bar{height:14px;border-radius:7px;background:rgba(255,255,255,.08);overflow:hidden}
+#batters .bar .fill{height:100%;width:0;border-radius:7px;background:var(--tc);box-shadow:0 0 8px var(--tc);transition:width 1.1s ease}
+#batters .bar .fill.dim{opacity:.45}
+#batters.in .bar .fill,#batters .in .bar .fill,#batters .bar.in .fill,.in #batters .bar .fill{width:var(--w)}
+#batters .bv{text-align:right}
+#batters .note{font-size:.75rem;opacity:.6;margin:4px 0}
+#batters .delta{justify-self:end;font-weight:800;color:var(--tc)}
+#batters .crowns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+#batters .crown{border:1px solid var(--tc);border-radius:12px;padding:12px;text-align:center}
+#batters .crown b{display:block;font-size:1.1rem}
+#batters .crown em{font-style:normal;font-size:.85rem;opacity:.8}
+#batters .dots i{display:inline-block;width:14px;height:14px;margin:0 3px;border-radius:50%;background:var(--tc);box-shadow:0 0 8px var(--tc)}
+#batters .pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+#batters .pcard{position:relative;overflow:hidden;border-radius:14px;padding:12px;min-height:250px;background:linear-gradient(170deg,var(--tc),#0b0e1a 85%);color:#fff;box-shadow:0 0 16px color-mix(in srgb,var(--tc) 45%,transparent)}
+#batters .emb{position:absolute;top:8px;left:8px;width:34px}
+#batters .pno{position:absolute;top:6px;right:12px;font-size:2.4rem;font-weight:900;opacity:.35}
+#batters .pl{display:block;width:70px;margin:14px auto 6px}
+#batters .pname{font-weight:800;text-align:center}
+#batters .pteam{font-size:.75rem;text-align:center;opacity:.8}
+#batters .pbig{font-size:2.2rem;font-weight:900;text-align:center;line-height:1.2}
+#batters .pbig small{font-size:.9rem;margin-left:3px}
+#batters .psub{text-align:center;font-size:.8rem;opacity:.85}
+@media(max-width:480px){#batters .brow{grid-template-columns:2.8em 4em 1fr 3.2em;font-size:.8rem}}
+
+#history .tl-scroll{overflow-x:auto}
+#history .tlsvg{min-width:900px;width:100%;height:auto}
+#history .tl-line{stroke:#5b6b8a;stroke-width:2}
+#history .tl-dot{fill:#0b1020;stroke:#39ff88;stroke-width:3}
+#history .tl-dot.hot{fill:#39ff88}
+#history .tl-y{fill:#39ff88;font-size:15px;font-weight:800}
+#history .tl-t{fill:currentColor;font-size:13px}
+#history .pcard{position:relative;border-radius:14px;padding:12px;text-align:center;background:linear-gradient(160deg,var(--tc),#0b1020 120%);color:#fff}
+#history .sil{width:64px;height:72px}
+#history .pno{position:absolute;top:8px;right:12px;font-size:26px;opacity:.5}
+#history .pn{font-weight:800}
+#history .pt,#history .pl{font-size:12px;opacity:.85}
+#history .pbig{font-size:32px;font-weight:900}
+#history .bars{display:grid;gap:8px}
+#history .brow{display:grid;grid-template-columns:130px 1fr 54px;align-items:center;gap:8px;font-size:13px}
+#history .bar{height:12px;background:rgba(255,255,255,.1);border-radius:6px;overflow:hidden}
+#history .bar .fill{display:block;height:100%;width:0;background:var(--tc);border-radius:6px;transition:width 1s ease}
+#history.in .bar .fill,#history .in .bar .fill,#history .bar.in .fill{width:var(--w)}
+#history .bv{text-align:right}
+#history .duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;align-items:center}
+#history .donut{width:200px;height:200px;transform:rotate(-90deg);display:block;margin:auto}
+#history .donut text{transform:rotate(90deg);transform-origin:21px 21px}
+#history .dleg{list-style:none;display:flex;flex-wrap:wrap;gap:6px 12px;padding:0;font-size:12px;justify-content:center}
+#history .dleg i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--tc);margin-right:4px}
+#history .badges{display:flex;gap:10px;justify-content:center;margin:12px 0}
+#history .badge{width:44px;height:44px}
+#history .line{width:100%;height:auto}
+
+#pitchers .pc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:10px 0 22px}
+#pitchers .pc-card{position:relative;overflow:hidden;border:1px solid var(--tc);border-radius:12px;padding:12px;background:linear-gradient(160deg,color-mix(in srgb,var(--tc) 38%,#0b0b14),#0b0b14 75%);text-align:center}
+#pitchers .pc-card svg{width:100%;max-width:140px;height:auto}
+#pitchers .pc-card h3{margin:4px 0 0;font-size:1.05rem}
+#pitchers .pc-team{font-size:.78rem;opacity:.85}
+#pitchers .pc-big{font-size:2.4rem;font-weight:900;line-height:1.1;color:var(--tc);text-shadow:0 0 14px var(--tc)}
+#pitchers .pc-lbl{font-size:.8rem;opacity:.85}
+#pitchers .pc-ico{font-size:1.4rem}
+#pitchers .bars{display:grid;gap:8px;margin:8px 0 20px}
+#pitchers .bar{display:grid;grid-template-columns:96px 1fr 56px;align-items:center;gap:8px;font-size:.85rem}
+#pitchers .bar .track{height:14px;border-radius:7px;background:rgba(255,255,255,.1);overflow:hidden}
+#pitchers .bar .fill{display:block;height:100%;width:0;border-radius:7px;background:var(--tc);box-shadow:0 0 10px var(--tc);transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+#pitchers.in .bar .fill,#pitchers .in .bar .fill,#pitchers .bar.in .fill{width:var(--w)}
+#pitchers .bar b{text-align:right;color:var(--tc)}
+#pitchers .pc-chart{border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:12px;margin:8px 0 20px}
+#pitchers .pc-chart h3{margin:0 0 6px;font-size:1rem}
+#pitchers .pc-chart svg{width:100%;height:auto;max-height:200px}
+#pitchers .pc-pills{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 20px}
+#pitchers .pc-pill{padding:6px 12px;border:1px solid var(--tc);border-radius:20px;font-size:.85rem;background:color-mix(in srgb,var(--tc) 18%,transparent)}
+
+#players .bar{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:13px}
+#players .bar .lb{width:64px;flex:none}
+#players .bar .trk{flex:1;height:14px;border-radius:7px;background:rgba(255,255,255,.08);overflow:hidden}
+#players .bar .fill{display:block;height:100%;width:0;border-radius:7px;background:var(--tc,#39ff88);transition:width 1s ease}
+#players.in .bar .fill,#players .in .bar .fill{width:var(--w)}
+#players .bar .v{width:34px;text-align:right;font-weight:700}
+#players .pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:10px 0}
+#players .pcard{position:relative;border-radius:14px;padding:10px;background:linear-gradient(160deg,var(--tc),#0b0f1a 90%);color:#fff;text-align:center;overflow:hidden}
+#players .pcard svg{width:70px;height:90px}
+#players .pcard .no{position:absolute;top:8px;right:12px;font-size:22px;font-weight:800;opacity:.85}
+#players .pcard .big{display:block;font-size:26px;font-weight:800}
+#players .pcard small{display:block;font-size:12px;opacity:.9}
+#players .badge-row{display:flex;flex-wrap:wrap;gap:12px;margin:10px 0}
+#players .tm{display:flex;flex-direction:column;align-items:center;gap:4px;width:84px;font-size:12px}
+#players .tm svg{width:56px;height:56px}
+#players .chip{padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;background:rgba(255,255,255,.12)}
+#players .chip.re{background:#1e6b3a}#players .chip.new{background:#a8570f}#players .chip.sw{background:#8a1f3a}
+#players .donut-wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+#players .donut-wrap svg{width:130px;height:130px}
+#players .lg-i{font-size:13px;line-height:1.8}
+
+#rules .rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}
+#rules .rule{position:relative;background:#14172b;border:1px solid #2a2f4a;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:4px}
+#rules .rule .ic{font-size:2rem}#rules .rule b{font-size:1.05rem}#rules .rule em{font-style:normal;font-size:.8rem;opacity:.8}
+#rules .rule .yr{position:absolute;right:10px;top:8px;font-weight:900;color:#ffd60a;text-shadow:0 0 12px #ffd60a}
+#rules .badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:14px 0}
+#rules .bdg{display:flex;flex-direction:column;align-items:center;width:64px;font-size:.7rem}#rules .bdg svg{width:52px;height:58px;filter:drop-shadow(0 0 8px var(--tc))}
+#rules .charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:12px 0}
+#rules .chart{margin:0;background:#14172b;border:1px solid #2a2f4a;border-radius:10px;padding:12px}
+#rules .chart figcaption{font-weight:900;margin-bottom:8px}
+#rules .bar{display:grid;grid-template-columns:76px 1fr auto;gap:8px;align-items:center;margin:6px 0;font-size:.82rem}
+#rules .bar .trk{height:14px;background:#252a45;border-radius:7px;overflow:hidden}
+#rules .bar .fill{display:block;height:100%;width:0;background:var(--tc);box-shadow:0 0 10px var(--tc);border-radius:7px;transition:width 1s ease-out}
+#rules.in .bar .fill,.in #rules .bar .fill,#rules .in .bar .fill,.sec.in .bar .fill{width:var(--w)}
+#rules .bv{font-variant-numeric:tabular-nums}
+#rules .donut svg{width:140px;display:block;margin:0 auto}#rules .donut .lg{display:flex;gap:12px;justify-content:center;font-size:.8rem}
+#rules .donut .lg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}
+#rules .wc{display:flex;gap:14px;justify-content:center;align-items:center;padding:10px;background:#14172b;border-radius:10px;border:1px dashed #ffd60a}
+#rules .wc b{color:#ffd60a}
+#rules .pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+#rules .pcard{background:linear-gradient(160deg,var(--tc),#0b0d1a 85%);border-radius:12px;padding:10px;text-align:center;border:1px solid var(--tc)}
+#rules .pcard svg{width:96px;height:120px}
+#rules .pc-n{display:block;font-size:1.8rem;font-weight:900;line-height:1.1;text-shadow:0 0 16px #000}
+#rules .pc-l{display:block;font-weight:900}#rules .pc-b small{opacity:.85}
+#rules .gh{margin:16px 0 6px}#rules .gh small{opacity:.6}
+#rules .flips{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+#rules .flip{perspective:600px;height:84px;outline:0;cursor:pointer}
+#rules .fi{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+#rules .flip:hover .fi,#rules .flip:focus .fi{transform:rotateY(180deg)}
+#rules .ff,#rules .fb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:6px;border-radius:8px;backface-visibility:hidden;border:1px solid #2a2f4a}
+#rules .ff{background:#14172b;font-weight:900}
+#rules .fb{background:#ffd60a;color:#111;font-size:.76rem;font-weight:700;transform:rotateY(180deg)}
+
+#season .t-lotte{--tc:#d00f31}
+#season .badge{width:44px;height:44px;display:block;margin:0 auto 6px}
+#season .chart{display:grid;gap:8px;margin:8px 0}
+#season .bar-row{display:grid;grid-template-columns:64px 1fr 52px;align-items:center;gap:8px}
+#season .bl{font-size:.85rem;white-space:nowrap}
+#season .bv{text-align:right;font-variant-numeric:tabular-nums}
+#season .bar{height:14px;border-radius:8px;background:rgba(255,255,255,.08);overflow:hidden}
+#season .bar .fill{display:block;height:100%;width:0;border-radius:8px;background:var(--tc);box-shadow:0 0 8px var(--tc);transition:width 1s ease}
+#season.in .bar .fill,#season .in .bar .fill,#season .bar.in .fill{width:var(--w)}
+#season .mini{font-size:.8rem;opacity:.7;margin:4px 0 12px}
+#season .donut{width:140px;height:140px;display:block;margin:0 auto}
+#season .legend{text-align:center;margin:6px 0 0}
+#season .pcards{display:flex;gap:12px;justify-content:center}
+#season .pcard{text-align:center;width:110px}
+#season .pcard svg{width:100%;height:auto;display:block}
+#season .pcard .num{display:block;font-size:1.8rem;color:var(--tc)}
+#season .pcard span{font-size:.8rem}
+#season .bracket{width:100%;height:auto;display:block;margin:8px 0}
+#season .score{display:grid;gap:6px;margin:8px 0}
+#season .sc-head,#season .sc-row{display:grid;grid-template-columns:56px repeat(7,1fr);gap:6px;text-align:center}
+#season .sc-head b{font-size:.75rem;opacity:.7}
+#season .sc-row i{font-style:normal;padding:8px 0;border-radius:6px;background:rgba(255,255,255,.06);border-bottom:3px solid var(--tc)}
+#season .sc-t{font-weight:700;text-align:left;color:var(--tc)}
+
+#spotlight .sp-badge,#spotlight .sp-pcard svg{display:block}
+#spotlight .sp-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:14px 0}
+#spotlight .sp-hero{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+#spotlight .sp-hero .num{font-size:clamp(34px,7vw,64px);font-weight:900;color:var(--tc,#39ff9c);line-height:1;text-shadow:0 0 18px var(--tc,#39ff9c)}
+#spotlight .sp-hero small{display:block;opacity:.75;margin-top:6px}
+#spotlight .sp-kpis{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+#spotlight .sp-kpi{flex:1 1 90px;text-align:center;padding:10px 6px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
+#spotlight .sp-kpi b{display:block;font-size:22px;color:var(--tc,#39ff9c)}
+#spotlight .sp-kpi span{font-size:12px;opacity:.75}
+#spotlight .bar{display:grid;grid-template-columns:84px 1fr 64px;gap:8px;align-items:center;margin:7px 0;font-size:13px}
+#spotlight .bar .track{height:14px;border-radius:7px;background:rgba(255,255,255,.08);overflow:hidden}
+#spotlight .bar .fill{display:block;height:100%;width:0;border-radius:7px;background:var(--tc,#39ff9c);box-shadow:0 0 10px var(--tc,#39ff9c);transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+#spotlight.in .bar .fill,#spotlight .in .bar .fill,#spotlight .bar.in .fill{width:var(--w,0%)}
+#spotlight .bar .fill.dim{background:#667;box-shadow:none}
+#spotlight .bar b{text-align:right;font-variant-numeric:tabular-nums}
+#spotlight .sp-pcard{border-radius:16px;overflow:hidden;background:linear-gradient(160deg,var(--tc,#39ff9c),#0b0f1a 85%);color:#fff;position:relative}
+#spotlight .sp-pcard .meta{padding:0 14px 14px;text-align:center}
+#spotlight .sp-pcard .big{font-size:40px;font-weight:900;line-height:1}
+#spotlight .sp-pcard .lab{font-size:13px;opacity:.9}
+#spotlight .sp-pcard .nm{font-weight:800;margin-top:4px}
+#spotlight .sp-chip{display:inline-block;padding:2px 9px;border-radius:99px;font-size:11px;font-weight:800;background:rgba(0,0,0,.45);color:#fff;margin:8px 0 0 10px}
+#spotlight .sp-donut{width:130px;height:130px;flex:none}
+#spotlight .sp-donut circle{fill:none;stroke-width:16;transition:stroke-dasharray 1.2s ease}
+#spotlight .sp-tl{display:flex;overflow-x:auto;gap:0;padding:14px 4px;scroll-snap-type:x proximity}
+#spotlight .sp-tl .tp{flex:0 0 96px;text-align:center;position:relative;scroll-snap-align:start;font-size:12px}
+#spotlight .sp-tl .tp::before{content:"";position:absolute;top:19px;left:0;right:0;height:2px;background:rgba(255,255,255,.18)}
+#spotlight .sp-tl .tp i{position:relative;z-index:1;display:grid;place-items:center;width:30px;height:30px;margin:4px auto 6px;border-radius:50%;background:var(--tc,#39ff9c);color:#000;font-style:normal;font-size:15px;box-shadow:0 0 10px var(--tc,#39ff9c)}
+#spotlight .sp-tl .tp time{display:block;font-weight:800}
+#spotlight .sp-dots{display:flex;gap:10px;justify-content:center;margin:10px 0}
+#spotlight .sp-dots span{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#000;background:var(--tc,#39ff9c)}
+#spotlight .sp-dots span.lose{background:#667;color:#fff}
+#spotlight .sp-dots span.next{background:transparent;border:2px dashed var(--tc,#39ff9c);color:var(--tc,#39ff9c)}
+#spotlight .sp-vs{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+#spotlight .sp-ico{font-size:30px}
+
+#teams .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+#teams .tcard{background:linear-gradient(160deg,color-mix(in srgb,var(--tc) 35%,#0b0f1a),#0b0f1a);border:1px solid var(--tc);border-radius:14px;padding:14px;text-align:center}
+#teams .tcard h3{font-size:14px;margin:6px 0}
+#teams .stat .num{font-size:34px;color:var(--tc)}
+#teams .chips{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;font-size:11px}
+#teams .chips span{background:#ffffff14;border-radius:99px;padding:2px 8px}
+#teams .sub{margin:24px 0 10px;font-size:15px}
+#teams .brow,#teams .rrow{display:flex;align-items:center;gap:8px;margin:6px 0}
+#teams .bl{width:48px;font-size:12px}
+#teams .bar{flex:1;height:14px;background:#ffffff14;border-radius:99px;overflow:hidden}
+#teams .bar .fill{display:block;height:100%;width:0;background:var(--tc);border-radius:99px;transition:width 1s ease}
+#teams .in .bar .fill,#teams.in .bar .fill{width:var(--w)}
+#teams .bv{width:36px;text-align:right}
+#teams .donutwrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+#teams .seg{stroke:var(--tc);transform:rotate(0)}
+#teams .legend{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:4px 14px;font-size:12px}
+#teams .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--tc);margin-right:5px}
+#teams .rk{width:34px;color:var(--tc)}
+#teams .dots{display:flex;gap:5px}
+#teams .dots u{width:12px;height:12px;border-radius:50%;background:#ffffff1f}
+#teams .dots u.on{background:var(--tc);box-shadow:0 0 8px var(--tc)}
+#teams .rrow em{font-size:11px;font-style:normal;opacity:.8}
+#teams .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+#teams .pcard{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--tc),#0b0f1a);border-radius:14px;padding:12px;min-height:150px}
+#teams .pcard .sil{position:absolute;right:-6px;bottom:-4px;opacity:.28}
+#teams .pv{display:block;font-size:34px;font-weight:800}
+#teams .pl{font-size:12px}
+#teams .pcard h4{margin:4px 0 2px;font-size:14px}
+#teams .pcard em{font-size:11px;font-style:normal;opacity:.85}
+
+
+/* name clarity */
+.pcard.t-lg::before,.sp-pcard.t-lg::before{content:"LG 트윈스"}
+.pcard.t-hanwha::before,.sp-pcard.t-hanwha::before{content:"한화 이글스"}
+.pcard.t-ssg::before,.sp-pcard.t-ssg::before{content:"SSG 랜더스"}
+.pcard.t-samsung::before,.sp-pcard.t-samsung::before{content:"삼성 라이온즈"}
+.pcard.t-nc::before,.sp-pcard.t-nc::before{content:"NC 다이노스"}
+.pcard.t-kt::before,.sp-pcard.t-kt::before{content:"kt wiz"}
+.pcard.t-lotte::before,.sp-pcard.t-lotte::before{content:"롯데 자이언츠"}
+.pcard.t-kia::before,.sp-pcard.t-kia::before{content:"KIA 타이거즈"}
+.pcard.t-doosan::before,.sp-pcard.t-doosan::before{content:"두산 베어스"}
+.pcard.t-kiwoom::before,.sp-pcard.t-kiwoom::before{content:"키움 히어로즈"}
+.pcard.bt-ss::before{content:"삼성 라이온즈"}
+.pcard.bt-lt::before{content:"롯데 자이언츠"}
+.pcard.bt-kt::before{content:"kt wiz"}
+.pcard.bt-kia::before{content:"KIA 타이거즈"}
+.pcard.bt-lg::before{content:"LG 트윈스"}
+.pcard.bt-hw::before{content:"한화 이글스"}
+.pcard.bt-nc::before{content:"NC 다이노스"}
+.pcard.bt-ds::before{content:"두산 베어스"}
+.pcard.bt-kw::before{content:"키움 히어로즈"}
+.pcard.bt-ssg::before{content:"SSG 랜더스"}
+.pcard::before,.sp-pcard::before{position:absolute;top:0;left:0;z-index:3;display:block;max-width:100%;padding:4px 10px;font:800 12px/1.2 'Noto Sans KR',sans-serif;letter-spacing:.02em;color:#fff;background:rgba(0,0,0,.55);border-bottom-right-radius:10px;backdrop-filter:blur(4px)}
+.pcard,.sp-pcard{padding-top:34px!important}
+.pcard h4,.pcard .pn,.pcard>b:not(.pv):not(.pno),.sp-pcard .nm,.pcard .pc-nm{display:block;font-size:20px!important;font-weight:900!important;line-height:1.2;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.6);margin:6px 0 2px}
+.pc-team{font-size:13px!important;font-weight:800;background:rgba(0,0,0,.5);display:inline-block;padding:3px 10px;border-radius:999px;margin-bottom:4px}
+.pc-big~*,.pcard em{font-size:12px}
+.sub.grp{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:900;margin:22px 0 10px;padding:8px 14px;border-left:6px solid var(--yl,#ffd400);background:linear-gradient(90deg,rgba(255,255,255,.08),transparent)}
+.sub.grp.bat{border-left-color:#ff4d4d}.sub.grp.pit{border-left-color:#3aa0ff}
+.brow .bl,.rank .lb,.bl{min-width:7.5em;white-space:nowrap;font-size:13px}
+.brow{grid-template-columns:auto 1fr auto!important}
+.pcard .pt,.pteam{font-weight:800}
+.mvp-pick{position:relative;overflow:hidden;margin:16px 0;padding:22px 20px;border-radius:16px;background:linear-gradient(135deg,var(--tc),#0b0f1a 90%);box-shadow:0 0 40px color-mix(in srgb,var(--tc) 55%,transparent);text-align:center}
+.mvp-crown{display:inline-block;background:#ffd400;color:#111;font-weight:900;padding:3px 14px;border-radius:999px;transform:skewX(-8deg)}
+.mvp-name{font-size:clamp(40px,10vw,76px);font-weight:900;line-height:1.1;margin:8px 0 2px;text-shadow:0 4px 18px rgba(0,0,0,.6)}
+.mvp-team{font-weight:800;opacity:.95}
+.mvp-n{position:absolute;top:10px;right:14px;font-size:34px;font-weight:900;opacity:.3}
+.mvp-big{font-size:34px;font-weight:900;margin:4px 0}
+.mvp-chart{margin:12px 0}.mvp-cands{margin-top:16px}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header class="hero" id="top">
+  <svg class="speed" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 1200 700">
+    <g transform="skewX(-28) translate(180 0)" id="speedLines"></g>
+  </svg>
+  <svg class="ball" aria-hidden="true" viewBox="0 0 200 200">
+    <defs>
+      <radialGradient id="bg" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#cfd5e6"/></radialGradient>
+    </defs>
+    <g class="spin">
+      <circle cx="100" cy="100" r="92" fill="url(#bg)"/>
+      <path d="M52 14C80 50 80 150 52 186" fill="none" stroke="#ff2e4d" stroke-width="3" class="stitch"/>
+      <path d="M148 14C120 50 120 150 148 186" fill="none" stroke="#ff2e4d" stroke-width="3" class="stitch"/>
+      <g stroke="#ff2e4d" stroke-width="3" stroke-linecap="round" opacity=".9">
+        <path d="M64 40l-12 4M70 62l-14 2M72 84l-14 0M72 106l-14 1M70 128l-14 -2M64 150l-12 -4"/>
+        <path d="M136 40l12 4M130 62l14 2M128 84l14 0M128 106l14 1M130 128l14 -2M136 150l12 -4"/>
+      </g>
+    </g>
+  </svg>
+  <span class="live">LIVE · 2026 SEASON</span>
+  <h1><span>KBO</span> <span class="y">2026</span><br><span class="o">ENCYCLOPEDIA</span></h1>
+  <p class="sub"><b>KBO 2026 시즌 백과사전</b> — 10개 구단, 팀·타자·투수·선수·규정·역사까지 한 페이지에 담은 전광판형 가이드.</p>
+  <div class="scoreboard">
+    <div class="stat"><span class="num" data-count="10">0</span><small>구단</small></div>
+    <div class="stat"><span class="num" data-count="144">0</span><small>팀당 경기</small></div>
+    <div class="stat"><span class="num" data-count="720">0</span><small>정규시즌 총 경기</small></div>
+    <div class="stat"><span class="num" data-count="1982">0</span><small>KBO 출범 원년</small></div>
+  </div>
+</header>
+
+<nav class="top" id="nav">
+  <a class="logo" href="#top">KBO&nbsp;2026</a>
+  <div class="links">
+    <a href="#spotlight">spotlight</a>
+    <a href="#teams">팀</a>
+    <a href="#season">시즌</a>
+    <a href="#batters">타자</a>
+    <a href="#pitchers">투수</a>
+    <a href="#mvp">MVP</a>
+    <a href="#players">선수</a>
+    <a href="#rules">규정</a>
+    <a href="#history">역사</a>
+  </div>
+  <label class="search"><input id="q" type="search" placeholder="검색: 팀·선수·용어" autocomplete="off" aria-label="검색"></label>
+</nav>
+<div id="sCount"></div>
+
+<main id="main">
+<section id="spotlight" class="sec"><h2 class="sec-title"><span class="no">★</span>SPOTLIGHT 2026 시즌 특별 조명</h2>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="sp-sil" viewBox="0 0 120 120"><path d="M14 120c0-26 20-42 46-42s46 16 46 42z" fill="#0b0f1a" opacity=".55"/><circle cx="60" cy="48" r="18" fill="#0b0f1a" opacity=".7"/><path d="M40 44c2-16 38-16 40 0z" fill="#fff" opacity=".9"/><rect x="58" y="40" width="40" height="5" rx="2" fill="#fff" opacity=".9"/><path d="M46 84l14 10 14-10" stroke="#fff" stroke-width="2" fill="none" opacity=".6"/></symbol>
+<symbol id="sp-emb" viewBox="0 0 100 100"><path d="M50 4l40 14v30c0 24-18 40-40 48C28 88 10 72 10 48V18z" fill="var(--tc)" stroke="#fff" stroke-width="3"/><path d="M22 30q10 20 0 40M78 30q-10 20 0 40" stroke="#fff" stroke-width="2.5" fill="none" stroke-dasharray="4 4" opacity=".8"/></symbol>
+</defs></svg>
+
+<div class="card feature"><div class="sp-hero">
+<svg class="sp-badge" width="84" height="84" viewBox="0 0 100 100" role="img" aria-label="KBO 관중 배지"><circle cx="50" cy="50" r="46" fill="#0b0f1a" stroke="var(--tc,#39ff9c)" stroke-width="4"/><path d="M20 28q14 22 0 44M80 28q-14 22 0 44" stroke="#fff" stroke-width="2.5" fill="none" stroke-dasharray="4 4"/><text x="50" y="60" text-anchor="middle" font-size="26" font-weight="900" fill="#fff">KBO</text></svg>
+<div><span class="sp-kick">RECORD</span><span class="num" data-to="12770551">12,770,551명</span><small>720경기 · 경기당 17,737명</small></div></div>
+<div class="sp-kpis"><div class="sp-kpi"><b>3년</b><span>연속 신기록</span></div><div class="sp-kpi"><b>684경기</b><span>1,200만 돌파</span></div><div class="sp-kpi"><b>8구단</b><span>100만 첫 돌파</span></div></div>
+<div class="sp-row"><div role="img" aria-label="관중 비교 막대 차트: 2025년 12,312,519명, 2026년 12,770,551명">
+<div class="bar"><span>2025</span><span class="track"><span class="fill dim" style="--w:96.4%"></span></span><b>1,231만</b></div>
+<div class="bar"><span>2026</span><span class="track"><span class="fill" style="--w:100%"></span></span><b>1,277만</b></div></div>
+<div role="img" aria-label="1,200만 돌파 경기 수 비교: 종전 703경기, 올해 684경기">
+<div class="bar"><span>종전</span><span class="track"><span class="fill dim" style="--w:100%"></span></span><b>703경기</b></div>
+<div class="bar"><span>올해</span><span class="track"><span class="fill" style="--w:97.3%"></span></span><b>684경기</b></div></div>
+<div role="img" aria-label="구단 평균 관중: 삼성 23,521명, 리그 평균 17,737명">
+<div class="bar t-samsung"><span>삼성 평균</span><span class="track"><span class="fill" style="--w:100%"></span></span><b>23,521</b></div>
+<div class="bar"><span>리그 평균</span><span class="track"><span class="fill dim" style="--w:75.4%"></span></span><b>17,737</b></div>
+<small>삼성 구단 최초 170만 돌파</small></div></div></div>
+
+<div class="card feature t-kt"><div class="sp-hero">
+<svg class="sp-badge" width="96" height="96" viewBox="0 0 100 100" role="img" aria-label="KT 위즈 엠블럼풍 배지"><use href="#sp-emb"/><text x="50" y="62" text-anchor="middle" font-size="30" font-weight="900" fill="#fff">KT</text></svg>
+<div><span class="sp-kick">CHAMPION</span><span class="num" data-to="90">90승 49패 5무</span><small>승률 .647 · 5년 만의 우승</small></div>
+<svg class="sp-donut" viewBox="0 0 100 100" role="img" aria-label="KT 144경기 도넛: 90승 49패 5무"><g transform="rotate(-90 50 50)"><circle cx="50" cy="50" r="40" stroke="#ff5a6e" style="stroke-dasharray:85.5 251.3;stroke-dashoffset:-157.1"/><circle cx="50" cy="50" r="40" stroke="#889" style="stroke-dasharray:8.7 251.3;stroke-dashoffset:-242.6"/><circle cx="50" cy="50" r="40" stroke="var(--tc,#39ff9c)" style="stroke-dasharray:157.1 251.3"/></g><text x="50" y="56" text-anchor="middle" font-size="20" font-weight="900" fill="#fff">.647</text></svg></div>
+<div class="sp-kpis"><div class="sp-kpi"><b>10연승</b><span>마지막 10경기 전승</span></div><div class="sp-kpi"><b>4.5경기</b><span>2위 삼성과 차이</span></div><div class="sp-kpi"><b>10/5</b><span>수원 롯데전 9-0</span></div><div class="sp-kpi"><b>이강철</b><span>감독 · 2021 이후</span></div></div>
+<div class="sp-dots" role="img" aria-label="마지막 10경기 10연승">🏆<span>W</span><span>W</span><span>W</span><span>W</span><span>W</span><span>W</span><span>W</span><span>W</span><span>W</span><span>W</span></div></div>
+
+<div class="grid g3">
+<div class="card sp-pcard t-lotte"><span class="sp-chip">최다 안타</span><svg viewBox="0 0 120 120" width="100%" height="120" role="img" aria-label="롯데 레이예스 선수 카드 실루엣"><use href="#sp-sil"/><text x="60" y="112" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">211</text></svg><div class="meta"><div class="big">211안타</div><div class="lab">KBO 단일 시즌 최다</div><div class="nm">레이예스</div>
+<div class="bar" role="img" aria-label="안타 비교: 레이예스 211, 최원준 208, 2024 레이예스 202"><span>레이예스</span><span class="track"><span class="fill" style="--w:100%"></span></span><b>211</b></div><div class="bar"><span>최원준</span><span class="track"><span class="fill dim" style="--w:98.6%"></span></span><b>208</b></div><div class="bar"><span>2024</span><span class="track"><span class="fill dim" style="--w:95.7%"></span></span><b>202</b></div><div class="lab">한 시즌 200안타 2명 · KBO 최초</div></div></div>
+<div class="card sp-pcard t-hanwha"><span class="sp-chip">통산 200승</span><svg viewBox="0 0 120 120" width="100%" height="120" role="img" aria-label="한화 류현진 선수 카드 실루엣"><use href="#sp-sil"/><text x="60" y="112" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">200W</text></svg><div class="meta"><div class="big">1,500K</div><div class="lab">최고령·최소경기 탈삼진</div><div class="nm">류현진</div>
+<div class="bar" role="img" aria-label="승수: KBO 122승, MLB 78승"><span>KBO</span><span class="track"><span class="fill" style="--w:100%"></span></span><b>122승</b></div><div class="bar"><span>MLB</span><span class="track"><span class="fill dim" style="--w:63.9%"></span></span><b>78승</b></div><div class="lab">39세 13일 · 246경기 · 5/24 200승</div></div></div>
+<div class="card sp-pcard t-ssg"><span class="sp-chip">최초 2관</span><svg viewBox="0 0 120 120" width="100%" height="120" role="img" aria-label="SSG 최정 선수 카드 실루엣"><use href="#sp-sil"/><text x="60" y="112" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">11</text></svg><div class="meta"><div class="big">11시즌</div><div class="lab">연속 20홈런 · 7/16 20호</div><div class="nm">최정</div>
+<div class="bar" role="img" aria-label="최정 연속 시즌: 두 자릿수 홈런 21시즌, 20홈런 11시즌"><span>10홈런+</span><span class="track"><span class="fill" style="--w:100%"></span></span><b>21시즌</b></div><div class="bar"><span>20홈런+</span><span class="track"><span class="fill dim" style="--w:52.4%"></span></span><b>11시즌</b></div><div class="lab">두 자릿수 21시즌 · 역대 최초</div></div></div>
+<div class="card sp-pcard t-lg"><span class="sp-chip">KBO 최초</span><svg viewBox="0 0 120 120" width="100%" height="120" role="img" aria-label="LG 오스틴 딘 선수 카드 실루엣"><use href="#sp-sil"/><text x="60" y="112" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">CYC</text></svg><div class="meta"><div class="big">연장 10회</div><div class="lab">사이클링히트 완성</div><div class="nm">오스틴 딘</div>
+<div class="sp-kpis"><div class="sp-kpi"><b>33번째</b><span>역대</span></div><div class="sp-kpi"><b>5-4</b><span>끝내기 승</span></div></div><div class="lab">8/25 잠실 NC전</div></div></div>
+<div class="card sp-pcard t-ssg"><span class="sp-chip">44년 만</span><svg viewBox="0 0 120 120" width="100%" height="120" role="img" aria-label="SSG 박성한 선수 카드 실루엣"><use href="#sp-sil"/><text x="60" y="112" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">22</text></svg><div class="meta"><div class="big">22경기</div><div class="lab">개막 연속 안타</div><div class="nm">박성한</div>
+<div class="bar" role="img" aria-label="개막 연속 안타: 박성한 22경기, 1982 김용희 18경기"><span>박성한</span><span class="track"><span class="fill" style="--w:100%"></span></span><b>22</b></div><div class="bar"><span>1982</span><span class="track"><span class="fill dim" style="--w:81.8%"></span></span><b>18</b></div><div class="lab">3/28~4/24</div></div></div>
+<div class="card sp-pcard t-kia"><span class="sp-chip">홈런왕</span><svg viewBox="0 0 120 120" width="100%" height="120" role="img" aria-label="KIA 김도영 선수 카드 실루엣"><use href="#sp-sil"/><text x="60" y="112" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">45</text></svg><div class="meta"><div class="big">45홈런</div><div class="lab">타이거즈 단일 시즌 최다</div><div class="nm">김도영</div>
+<div class="bar" role="img" aria-label="홈런: 김도영 45, 힐리어드 44, 종전 타이거즈 40"><span>김도영</span><span class="track"><span class="fill" style="--w:100%"></span></span><b>45</b></div><div class="bar"><span>힐리어드</span><span class="track"><span class="fill dim" style="--w:97.8%"></span></span><b>44</b></div><div class="bar"><span>종전</span><span class="track"><span class="fill dim" style="--w:88.9%"></span></span><b>40</b></div><div class="lab">장타율 .647 · 2관왕 · 최형우 42세 4,500루타</div></div></div>
+</div>
+
+<div class="sp-row">
+<div class="card t-samsung"><div class="sp-vs"><svg class="sp-badge" width="60" height="60" viewBox="0 0 100 100" role="img" aria-label="삼성 배지"><use href="#sp-emb"/><text x="50" y="62" text-anchor="middle" font-size="26" font-weight="900" fill="#fff">S</text></svg><span class="num">2 : 1</span><svg class="sp-badge t-kt" width="60" height="60" viewBox="0 0 100 100" role="img" aria-label="KT 배지"><use href="#sp-emb"/><text x="50" y="62" text-anchor="middle" font-size="26" font-weight="900" fill="#fff">KT</text></svg></div>
+<h3>한국시리즈 · 오늘 4차전</h3>
+<div class="sp-dots" role="img" aria-label="1차전 KT 승, 2차전 삼성 승, 3차전 삼성 승, 4차전 예정"><span class="lose">1</span><span>2</span><span>3</span><span class="next">4</span></div>
+<div class="sp-kpis"><div class="sp-kpi"><b>16/18</b><span>3차전 승리팀 우승</span></div><div class="sp-kpi"><b>12년</b><span>삼성 우승 시</span></div></div><small>결과 미확정</small></div>
+<div class="card"><span class="sp-ico">🎯</span><span class="num">ABS +2cm</span><h3>전 경기 적용</h3>
+<div class="sp-kpis"><div class="sp-kpi"><b>±2cm</b><span>좌우 확대</span></div><div class="sp-kpi"><b>⏱</b><span>피치클락 완화</span></div></div></div>
+<div class="card"><span class="sp-ico">🌏</span><span class="num">정원 68명</span><h3>아시아쿼터 원년</h3>
+<div role="img" aria-label="구단 정원 65명에서 68명으로 확대"><div class="bar"><span>이전</span><span class="track"><span class="fill dim" style="--w:95.6%"></span></span><b>65명</b></div><div class="bar"><span>올해</span><span class="track"><span class="fill" style="--w:100%"></span></span><b>68명</b></div></div><small>잠실 마지막 시즌</small></div>
+</div>
+
+<h3>명장면 타임라인</h3>
+<div class="sp-tl" role="list">
+<div class="tp" role="listitem"><time>3/28</time><i>🎬</i>개막</div>
+<div class="tp" role="listitem"><time>4/7</time><i>🔥</i>류현진 1,500K</div>
+<div class="tp" role="listitem"><time>4/24</time><i>⚡</i>박성한 22G</div>
+<div class="tp" role="listitem"><time>5/24</time><i>🌏</i>류현진 200승</div>
+<div class="tp" role="listitem"><time>7/11</time><i>⭐</i>올스타전</div>
+<div class="tp" role="listitem"><time>7/16</time><i>💣</i>최정 11시즌</div>
+<div class="tp" role="listitem"><time>8/25</time><i>🔄</i>딘 사이클링</div>
+<div class="tp" role="listitem"><time>10/1</time><i>👥</i>1,200만</div>
+<div class="tp" role="listitem"><time>10/5</time><i>🏆</i>KT 우승</div>
+<div class="tp" role="listitem"><time>10/6</time><i>🎯</i>레이예스 200H</div>
+<div class="tp" role="listitem"><time>10/12</time><i>9️⃣</i>KT 90승</div>
+<div class="tp" role="listitem"><time>11/3</time><i>🏟</i>KS 개막</div>
+<div class="tp" role="listitem"><time>11/7</time><i>▶</i>KS 4차전</div>
+</div>
+<span class="src">출처: Korea Times, 미디어펜, 머니투데이, 일간스포츠, 헤럴드경제, 국민일보, 뉴시스, 스포티비뉴스, 뉴스1, KBO 공식 규정 페이지, Wikipedia</span>
+</section>
+
+<section id="teams" class="sec"><h2 class="sec-title"><span class="no">01</span>10개 구단 백과</h2>
+<div class="tgrid">
+<div class="tcard t-lg"><svg class="badge" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="LG 엠블럼"><path d="M32 3 56 12v20c0 14-10 24-24 29C18 56 8 46 8 32V12z" fill="var(--tc)" stroke="#fff" stroke-opacity=".7" stroke-width="2"/><path d="M14 18q10 14 0 28M50 18q-10 14 0 28" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="2 3"/><text x="32" y="38" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">LG</text></svg><h3>LG 트윈스</h3><div class="stat"><b class="num">4</b><span>우승</span></div><div class="chips"><span>📍서울</span><span>🏟️잠실</span><span>🗓️1982</span></div></div>
+<div class="tcard t-hanwha"><svg class="badge" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="한화 엠블럼"><path d="M32 3 56 12v20c0 14-10 24-24 29C18 56 8 46 8 32V12z" fill="var(--tc)" stroke="#fff" stroke-opacity=".7" stroke-width="2"/><path d="M14 18q10 14 0 28M50 18q-10 14 0 28" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="2 3"/><text x="32" y="38" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">한화</text></svg><h3>한화 이글스</h3><div class="stat"><b class="num">1</b><span>우승</span></div><div class="chips"><span>📍대전</span><span>🏟️대전 볼파크</span><span>🗓️1986</span></div></div>
+<div class="tcard t-ssg"><svg class="badge" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="SSG 엠블럼"><path d="M32 3 56 12v20c0 14-10 24-24 29C18 56 8 46 8 32V12z" fill="var(--tc)" stroke="#fff" stroke-opacity=".7" stroke-width="2"/><path d="M14 18q10 14 0 28M50 18q-10 14 0 28" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="2 3"/><text x="32" y="38" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">SSG</text></svg><h3>SSG 랜더스</h3><div class="stat"><b class="num">5</b><span>우승</span></div><div class="chips"><span>📍인천</span><span>🏟️랜더스필드</span><span>🗓️2000</span></div></div>
+<div class="tcard t-samsung"><svg class="badge" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="삼성 엠블럼"><path d="M32 3 56 12v20c0 14-10 24-24 29C18 56 8 46 8 32V12z" fill="var(--tc)" stroke="#fff" stroke-opacity=".7" stroke-width="2"/><path d="M14 18q10 14 0 28M50 18q-10 14 0 28" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="2 3"/><text x="32" y="38" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">삼성</text></svg><h3>삼성 라이온즈</h3><div class="stat"><b class="num">8</b><span>우승</span></div><div class="chips"><span>📍대구</span><span>🏟️라이온즈 파크</span><span>🗓️1982</span></div></div>
+<div class="tcard t-nc"><svg class="badge" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="NC 엠블럼"><path d="M32 3 56 12v20c0 14-10 24-24 29C18 56 8 46 8 32V12z" fill="var(--tc)" stroke="#fff" stroke-opacity=".7" stroke-width="2"/><path d="M14 18q10 14 0 28M50 18q-10 14 0 28" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="2 3"/><text x="32" y="38" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">NC</text></svg><h3>NC 다이노스</h3><div class="stat"><b class="num">0</b><span>우승</span></div><div class="chips"><span>📍창원</span><span>🏟️창원NC파크</span><span>🗓️2011</span></div></div>
+<div class="tcard t-kt"><svg class="badge" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="kt 엠블럼"><path d="M32 3 56 12v20c0 14-10 24-24 29C18 56 8 46 8 32V12z" fill="var(--tc)" stroke="#fff" stroke-opacity=".7" stroke-width="2"/><path d="M14 18q10 14 0 28M50 18q-10 14 0 28" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="2 3"/><text x="32" y="38" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">kt</text></svg><h3>kt wiz</h3><div class="stat"><b class="num">1</b><span>우승</span></div><div class="chips"><span>📍수원</span><span>🏟️kt 위즈 파크</span><span>🗓️2013</span></div></div>
+<div class="tcard t-lotte"><svg class="badge" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="롯데 엠블럼"><path d="M32 3 56 12v20c0 14-10 24-24 29C18 56 8 46 8 32V12z" fill="var(--tc)" stroke="#fff" stroke-opacity=".7" stroke-width="2"/><path d="M14 18q10 14 0 28M50 18q-10 14 0 28" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="2 3"/><text x="32" y="38" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">롯데</text></svg><h3>롯데 자이언츠</h3><div class="stat"><b class="num">2</b><span>우승</span></div><div class="chips"><span>📍부산</span><span>🏟️사직</span><span>🗓️1982</span></div></div>
+<div class="tcard t-kia"><svg class="badge" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="KIA 엠블럼"><path d="M32 3 56 12v20c0 14-10 24-24 29C18 56 8 46 8 32V12z" fill="var(--tc)" stroke="#fff" stroke-opacity=".7" stroke-width="2"/><path d="M14 18q10 14 0 28M50 18q-10 14 0 28" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="2 3"/><text x="32" y="38" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">KIA</text></svg><h3>KIA 타이거즈</h3><div class="stat"><b class="num">12</b><span>우승</span></div><div class="chips"><span>📍광주</span><span>🏟️챔피언스 필드</span><span>🗓️1982</span></div></div>
+<div class="tcard t-doosan"><svg class="badge" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="두산 엠블럼"><path d="M32 3 56 12v20c0 14-10 24-24 29C18 56 8 46 8 32V12z" fill="var(--tc)" stroke="#fff" stroke-opacity=".7" stroke-width="2"/><path d="M14 18q10 14 0 28M50 18q-10 14 0 28" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="2 3"/><text x="32" y="38" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">두산</text></svg><h3>두산 베어스</h3><div class="stat"><b class="num">6</b><span>우승</span></div><div class="chips"><span>📍서울</span><span>🏟️잠실</span><span>🗓️1982</span></div></div>
+<div class="tcard t-kiwoom"><svg class="badge" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="키움 엠블럼"><path d="M32 3 56 12v20c0 14-10 24-24 29C18 56 8 46 8 32V12z" fill="var(--tc)" stroke="#fff" stroke-opacity=".7" stroke-width="2"/><path d="M14 18q10 14 0 28M50 18q-10 14 0 28" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="2 3"/><text x="32" y="38" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">키움</text></svg><h3>키움 히어로즈</h3><div class="stat"><b class="num">0</b><span>우승</span></div><div class="chips"><span>📍서울</span><span>🏟️고척 스카이돔</span><span>🗓️2008</span></div></div>
+</div>
+<h3 class="sub">🏆 한국시리즈 우승 횟수</h3><div class="chart" role="img" aria-label="구단별 한국시리즈 우승 횟수 막대 비교">
+<div class="brow t-kia"><span class="bl">KIA 타이거즈</span><div class="bar"><i class="fill" style="--w:100%"></i></div><b class="bv">12</b></div>
+<div class="brow t-samsung"><span class="bl">삼성 라이온즈</span><div class="bar"><i class="fill" style="--w:67%"></i></div><b class="bv">8</b></div>
+<div class="brow t-doosan"><span class="bl">두산 베어스</span><div class="bar"><i class="fill" style="--w:50%"></i></div><b class="bv">6</b></div>
+<div class="brow t-ssg"><span class="bl">SSG 랜더스</span><div class="bar"><i class="fill" style="--w:42%"></i></div><b class="bv">5</b></div>
+<div class="brow t-lg"><span class="bl">LG 트윈스</span><div class="bar"><i class="fill" style="--w:33%"></i></div><b class="bv">4</b></div>
+<div class="brow t-lotte"><span class="bl">롯데 자이언츠</span><div class="bar"><i class="fill" style="--w:17%"></i></div><b class="bv">2</b></div>
+<div class="brow t-hanwha"><span class="bl">한화 이글스</span><div class="bar"><i class="fill" style="--w:8%"></i></div><b class="bv">1</b></div>
+<div class="brow t-kt"><span class="bl">kt wiz</span><div class="bar"><i class="fill" style="--w:8%"></i></div><b class="bv">1</b></div>
+<div class="brow t-nc"><span class="bl">NC 다이노스</span><div class="bar"><i class="fill" style="--w:0%"></i></div><b class="bv">0</b></div>
+<div class="brow t-kiwoom"><span class="bl">키움 히어로즈</span><div class="bar"><i class="fill" style="--w:0%"></i></div><b class="bv">0</b></div>
+</div>
+<h3 class="sub">🍩 우승 점유 (총 39회)</h3><div class="donutwrap"><svg viewBox="0 0 42 42" width="160" height="160" role="img" aria-label="우승 점유 도넛: KIA 12, 삼성 8, 두산 6, SSG 5, LG 4, 롯데 2, 한화 1, kt 1">
+<circle class="seg t-kia" cx="21" cy="21" r="15.9155" fill="none" stroke-width="6" stroke-dasharray="30.77 69.23" stroke-dashoffset="25.00"/>
+<circle class="seg t-samsung" cx="21" cy="21" r="15.9155" fill="none" stroke-width="6" stroke-dasharray="20.51 79.49" stroke-dashoffset="-5.77"/>
+<circle class="seg t-doosan" cx="21" cy="21" r="15.9155" fill="none" stroke-width="6" stroke-dasharray="15.38 84.62" stroke-dashoffset="-26.28"/>
+<circle class="seg t-ssg" cx="21" cy="21" r="15.9155" fill="none" stroke-width="6" stroke-dasharray="12.82 87.18" stroke-dashoffset="-41.67"/>
+<circle class="seg t-lg" cx="21" cy="21" r="15.9155" fill="none" stroke-width="6" stroke-dasharray="10.26 89.74" stroke-dashoffset="-54.49"/>
+<circle class="seg t-lotte" cx="21" cy="21" r="15.9155" fill="none" stroke-width="6" stroke-dasharray="5.13 94.87" stroke-dashoffset="-64.74"/>
+<circle class="seg t-hanwha" cx="21" cy="21" r="15.9155" fill="none" stroke-width="6" stroke-dasharray="2.56 97.44" stroke-dashoffset="-69.87"/>
+<circle class="seg t-kt" cx="21" cy="21" r="15.9155" fill="none" stroke-width="6" stroke-dasharray="2.56 97.44" stroke-dashoffset="-72.44"/>
+<text x="21" y="23" text-anchor="middle" font-size="7" font-weight="800" fill="#fff">39</text></svg><ul class="legend"><li class="t-kia"><i></i>KIA 타이거즈 12</li><li class="t-samsung"><i></i>삼성 라이온즈 8</li><li class="t-doosan"><i></i>두산 베어스 6</li><li class="t-ssg"><i></i>SSG 랜더스 5</li><li class="t-lg"><i></i>LG 트윈스 4</li><li class="t-lotte"><i></i>롯데 자이언츠 2</li><li class="t-hanwha"><i></i>한화 이글스 1</li><li class="t-kt"><i></i>kt wiz 1</li></ul></div>
+<h3 class="sub">📊 2026 순위 (5강)</h3><div class="rank" role="img" aria-label="2026 정규시즌 1위 kt, 2위 삼성, 3위 KIA, 4위 LG, 5위 두산">
+<div class="rrow t-kt"><b class="rk">1위</b><span class="bl">kt wiz</span><div class="dots"><u class="on"></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u></div><em>90승 5무 49패</em></div>
+<div class="rrow t-samsung"><b class="rk">2위</b><span class="bl">삼성 라이온즈</span><div class="dots"><u class=""></u><u class="on"></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u></div><em>83승 3무 58패</em></div>
+<div class="rrow t-kia"><b class="rk">3위</b><span class="bl">KIA 타이거즈</span><div class="dots"><u class=""></u><u class=""></u><u class="on"></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u></div><em>79승 2무 63패</em></div>
+<div class="rrow t-lg"><b class="rk">4위</b><span class="bl">LG 트윈스</span><div class="dots"><u class=""></u><u class=""></u><u class=""></u><u class="on"></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u></div><em>78승 1무 65패</em></div>
+<div class="rrow t-doosan"><b class="rk">5위</b><span class="bl">두산 베어스</span><div class="dots"><u class=""></u><u class=""></u><u class=""></u><u class=""></u><u class="on"></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u><u class=""></u></div><em>73승 5무 66패</em></div>
+</div>
+<div class="chart" role="img" aria-label="2026 승수 비교: kt 90, 삼성 83, KIA 79, LG 78, 두산 73">
+<div class="brow t-kt"><span class="bl">kt wiz</span><div class="bar"><i class="fill" style="--w:90%"></i></div><b class="bv">90승</b></div>
+<div class="brow t-samsung"><span class="bl">삼성 라이온즈</span><div class="bar"><i class="fill" style="--w:83%"></i></div><b class="bv">83승</b></div>
+<div class="brow t-kia"><span class="bl">KIA 타이거즈</span><div class="bar"><i class="fill" style="--w:79%"></i></div><b class="bv">79승</b></div>
+<div class="brow t-lg"><span class="bl">LG 트윈스</span><div class="bar"><i class="fill" style="--w:78%"></i></div><b class="bv">78승</b></div>
+<div class="brow t-doosan"><span class="bl">두산 베어스</span><div class="bar"><i class="fill" style="--w:73%"></i></div><b class="bv">73승</b></div>
+</div>
+<h3 class="sub grp bat">🏏 타자 — 핵심 선수</h3><div class="pgrid">
+<div class="pcard t-kt"><svg class="sil" viewBox="0 0 80 90" width="80" height="90" aria-hidden="true"><circle cx="40" cy="16" r="9" fill="#fff" fill-opacity=".9"/><path d="M29 8h22l-3-5H32z" fill="#fff"/><path d="M20 90V50q0-14 14-16h12q14 2 14 16v40z" fill="#fff" fill-opacity=".85"/><path d="M60 44l16-20" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg><b class="pv">44</b><span class="pl">홈런</span><h4>힐리어드</h4><em>타점왕 139</em></div>
+<div class="pcard t-kia"><svg class="sil" viewBox="0 0 80 90" width="80" height="90" aria-hidden="true"><circle cx="40" cy="16" r="9" fill="#fff" fill-opacity=".9"/><path d="M29 8h22l-3-5H32z" fill="#fff"/><path d="M20 90V50q0-14 14-16h12q14 2 14 16v40z" fill="#fff" fill-opacity=".85"/><path d="M60 44l16-20" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg><b class="pv">45</b><span class="pl">홈런</span><h4>김도영</h4><em>홈런왕</em></div>
+<div class="pcard t-samsung"><svg class="sil" viewBox="0 0 80 90" width="80" height="90" aria-hidden="true"><circle cx="40" cy="16" r="9" fill="#fff" fill-opacity=".9"/><path d="M29 8h22l-3-5H32z" fill="#fff"/><path d="M20 90V50q0-14 14-16h12q14 2 14 16v40z" fill="#fff" fill-opacity=".85"/><path d="M60 44l16-20" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg><b class="pv">0.371</b><span class="pl">타율</span><h4>구자욱</h4><em>1위</em></div>
+<div class="pcard t-lotte"><svg class="sil" viewBox="0 0 80 90" width="80" height="90" aria-hidden="true"><circle cx="40" cy="16" r="9" fill="#fff" fill-opacity=".9"/><path d="M29 8h22l-3-5H32z" fill="#fff"/><path d="M20 90V50q0-14 14-16h12q14 2 14 16v40z" fill="#fff" fill-opacity=".85"/><path d="M60 44l16-20" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg><b class="pv">211</b><span class="pl">안타</span><h4>레이예스</h4><em>단일 시즌 최다</em></div>
+</div>
+<h3 class="sub grp pit">🔥 투수 — 핵심 선수</h3><div class="pgrid">
+<div class="pcard t-samsung"><svg class="sil" viewBox="0 0 80 90" width="80" height="90" aria-hidden="true"><circle cx="40" cy="16" r="9" fill="#fff" fill-opacity=".9"/><path d="M29 8h22l-3-5H32z" fill="#fff"/><path d="M20 90V50q0-14 14-16h12q14 2 14 16v40z" fill="#fff" fill-opacity=".85"/><path d="M60 44l16-20" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg><b class="pv">35</b><span class="pl">세이브</span><h4>김재윤</h4><em>구원 1위</em></div>
+<div class="pcard t-kt"><svg class="sil" viewBox="0 0 80 90" width="80" height="90" aria-hidden="true"><circle cx="40" cy="16" r="9" fill="#fff" fill-opacity=".9"/><path d="M29 8h22l-3-5H32z" fill="#fff"/><path d="M20 90V50q0-14 14-16h12q14 2 14 16v40z" fill="#fff" fill-opacity=".85"/><path d="M60 44l16-20" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg><b class="pv">30</b><span class="pl">세이브</span><h4>박영현</h4></div>
+<div class="pcard t-kt"><svg class="sil" viewBox="0 0 80 90" width="80" height="90" aria-hidden="true"><circle cx="40" cy="16" r="9" fill="#fff" fill-opacity=".9"/><path d="M29 8h22l-3-5H32z" fill="#fff"/><path d="M20 90V50q0-14 14-16h12q14 2 14 16v40z" fill="#fff" fill-opacity=".85"/><path d="M60 44l16-20" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg><b class="pv">15</b><span class="pl">승</span><h4>고영표</h4></div>
+</div><p class="note">우승: 2025 시즌까지 · 2026 KS는 kt vs 삼성</p>
+</section>
+<section id="season" class="sec">
+<h2 class="sec-title"><span class="no">02</span>2026 시즌 총정리</h2>
+
+<div class="grid g4">
+  <div class="stat t-kt"><svg class="badge" viewBox="0 0 64 64" role="img" aria-label="KT 위즈 엠블럼풍 배지"><path d="M32 3 58 12v22c0 14-11 24-26 28C17 58 6 48 6 34V12z" fill="var(--tc)" stroke="#fff" stroke-opacity=".6" stroke-width="2"/><path d="M12 20q8 12 0 24M52 20q-8 12 0 24" fill="none" stroke="#fff" stroke-dasharray="3 3" stroke-width="1.5"/><text x="32" y="39" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">KT</text></svg><b class="num">1위</b><span>정규시즌</span></div>
+  <div class="stat"><b class="num">90승</b><span>5무 49패</span></div>
+  <div class="stat"><b class="num">.647</b><span>KT 승률</span></div>
+  <div class="stat"><b class="num">11/2</b><span>KS 1차전 · 수원</span></div>
+</div>
+
+<h3>📊 순위 · 승수</h3>
+<div class="chart" role="img" aria-label="정규시즌 상위 5팀 승수 막대차트: KT 90, 삼성 83, KIA 79, LG 78, 두산 73">
+  <div class="bar-row t-kt"><span class="bl">1 KT</span><div class="bar"><i class="fill" style="--w:90%"></i></div><b class="bv">90승</b></div>
+  <div class="bar-row t-samsung"><span class="bl">2 삼성</span><div class="bar"><i class="fill" style="--w:83%"></i></div><b class="bv">83승</b></div>
+  <div class="bar-row t-kia"><span class="bl">3 KIA</span><div class="bar"><i class="fill" style="--w:79%"></i></div><b class="bv">79승</b></div>
+  <div class="bar-row t-lg"><span class="bl">4 LG</span><div class="bar"><i class="fill" style="--w:78%"></i></div><b class="bv">78승</b></div>
+  <div class="bar-row t-doosan"><span class="bl">5 두산</span><div class="bar"><i class="fill" style="--w:73%"></i></div><b class="bv">73승</b></div>
+</div>
+
+<h3>📈 승률</h3>
+<div class="chart" role="img" aria-label="상위 5팀 승률: KT .647, 삼성 .589, KIA .556, LG .545, 두산 .525">
+  <div class="bar-row t-kt"><span class="bl">kt wiz</span><div class="bar"><i class="fill" style="--w:64.7%"></i></div><b class="bv">.647</b></div>
+  <div class="bar-row t-samsung"><span class="bl">삼성 라이온즈</span><div class="bar"><i class="fill" style="--w:58.9%"></i></div><b class="bv">.589</b></div>
+  <div class="bar-row t-kia"><span class="bl">KIA 타이거즈</span><div class="bar"><i class="fill" style="--w:55.6%"></i></div><b class="bv">.556</b></div>
+  <div class="bar-row t-lg"><span class="bl">LG 트윈스</span><div class="bar"><i class="fill" style="--w:54.5%"></i></div><b class="bv">.545</b></div>
+  <div class="bar-row t-doosan"><span class="bl">두산 베어스</span><div class="bar"><i class="fill" style="--w:52.5%"></i></div><b class="bv">.525</b></div>
+</div>
+<p class="mini">6~10위 SSG · 롯데 · NC · 한화 · 키움 탈락</p>
+
+<div class="grid g2">
+  <div class="card t-kt">
+    <h3>KT 144경기</h3>
+    <svg class="donut" viewBox="0 0 120 120" role="img" aria-label="KT 144경기 도넛: 90승 5무 49패">
+      <circle cx="60" cy="60" r="40" fill="none" stroke="#e5484d" stroke-width="16" stroke-opacity=".8"/>
+      <circle cx="60" cy="60" r="40" fill="none" stroke="#8a93a6" stroke-width="16" stroke-dasharray="8.7 242.6" stroke-dashoffset="-157.1" transform="rotate(-90 60 60)"/>
+      <circle cx="60" cy="60" r="40" fill="none" stroke="var(--tc)" stroke-width="16" stroke-dasharray="157.1 94.2" transform="rotate(-90 60 60)"/>
+      <text x="60" y="58" text-anchor="middle" font-size="20" font-weight="800" fill="currentColor">.647</text>
+      <text x="60" y="75" text-anchor="middle" font-size="9" fill="currentColor">승률</text>
+    </svg>
+    <p class="legend"><b>90</b> 승 · <b>5</b> 무 · <b>49</b> 패</p>
+  </div>
+  <div class="card">
+    <h3>시즌 기록</h3>
+    <div class="pcards">
+      <div class="pcard t-kia">
+        <svg viewBox="0 0 90 110" role="img" aria-label="KIA 타이거즈 유니폼 선수 실루엣 카드, 등번호 자리 표시">
+          <rect width="90" height="110" rx="10" fill="var(--tc)"/>
+          <circle cx="45" cy="30" r="13" fill="#0b0f1a" fill-opacity=".75"/>
+          <path d="M18 100q0-40 27-40t27 40z" fill="#0b0f1a" fill-opacity=".75"/>
+          <path d="M33 12q12-10 24 0l-2 5H35z" fill="#fff" fill-opacity=".8"/>
+          <text x="45" y="92" text-anchor="middle" font-size="22" font-weight="800" fill="#fff">#</text>
+        </svg>
+        <b class="num">45</b><span>홈런 · 김도영</span>
+      </div>
+      <div class="pcard t-lotte">
+        <svg viewBox="0 0 90 110" role="img" aria-label="롯데 자이언츠 유니폼 선수 실루엣 카드, 등번호 자리 표시">
+          <rect width="90" height="110" rx="10" fill="var(--tc)"/>
+          <circle cx="45" cy="30" r="13" fill="#0b0f1a" fill-opacity=".75"/>
+          <path d="M18 100q0-40 27-40t27 40z" fill="#0b0f1a" fill-opacity=".75"/>
+          <path d="M33 12q12-10 24 0l-2 5H35z" fill="#fff" fill-opacity=".8"/>
+          <text x="45" y="92" text-anchor="middle" font-size="22" font-weight="800" fill="#fff">#</text>
+        </svg>
+        <b class="num">211</b><span>안타 · 레이예스</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3>⚾ 포스트시즌 대진</h3>
+<svg class="bracket" viewBox="0 0 680 250" role="img" aria-label="포스트시즌 대진 브라켓: 와일드카드 LG 대 두산, 준플레이오프 KIA, 플레이오프 삼성, 한국시리즈 KT 대 삼성">
+  <g font-size="12" font-weight="700" fill="#fff" text-anchor="middle">
+    <g class="t-lg"><rect x="10" y="30" width="110" height="34" rx="8" fill="var(--tc)"/><text x="65" y="52">LG (4위)</text></g>
+    <g class="t-doosan"><rect x="10" y="80" width="110" height="34" rx="8" fill="var(--tc)"/><text x="65" y="102">두산 (5위)</text></g>
+    <g class="t-kia"><rect x="180" y="130" width="110" height="34" rx="8" fill="var(--tc)"/><text x="235" y="152">KIA (3위)</text></g>
+    <g class="t-samsung"><rect x="350" y="180" width="110" height="34" rx="8" fill="var(--tc)"/><text x="405" y="202">삼성 (2위)</text></g>
+    <g class="t-kt"><rect x="520" y="30" width="110" height="34" rx="8" fill="var(--tc)"/><text x="575" y="52">KT (1위)</text></g>
+    <g class="t-samsung"><rect x="520" y="100" width="110" height="34" rx="8" fill="var(--tc)"/><text x="575" y="122">삼성</text></g>
+  </g>
+  <g fill="none" stroke="#8a93a6" stroke-width="2">
+    <path d="M120 47h30v35M120 97h30V82M150 82h30v65h0M290 147h30v50h30M460 197h30v-80h30M575 64v36"/>
+  </g>
+  <g font-size="10" fill="#8a93a6" text-anchor="middle">
+    <text x="65" y="20">와일드카드</text><text x="235" y="120">준플레이오프</text><text x="405" y="170">플레이오프 (2승 2패→5차전)</text><text x="575" y="20">한국시리즈</text>
+  </g>
+</svg>
+
+<h3>🏆 한국시리즈</h3>
+<div class="score" role="img" aria-label="한국시리즈 KT 대 삼성 스코어보드, 1차전 11월 2일 수원, 결과 미확인">
+  <div class="sc-head"><span></span><b>1</b><b>2</b><b>3</b><b>4</b><b>5</b><b>6</b><b>7</b></div>
+  <div class="sc-row t-kt"><span class="sc-t">kt wiz</span><i>?</i><i>?</i><i>?</i><i>?</i><i>?</i><i>?</i><i>?</i></div>
+  <div class="sc-row t-samsung"><span class="sc-t">삼성 라이온즈</span><i>?</i><i>?</i><i>?</i><i>?</i><i>?</i><i>?</i><i>?</i></div>
+</div>
+<div class="note">🏆 11/7 기준 우승팀·MVP 미확인</div>
+
+<h3>🗓️ 타임라인</h3>
+<div class="timeline">
+  <div class="tl-item"><b>3월</b> 개막</div>
+  <div class="tl-item"><b>10월 초</b> KT 1위 확정</div>
+  <div class="tl-item"><b>10월</b> WC · 준PO · PO</div>
+  <div class="tl-item"><b>11/2</b> KS 1차전 KT vs 삼성</div>
+</div>
+</section>
+
+<section id="batters" class="sec">
+<h2 class="sec-title"><span class="no">03</span>타자 부문 리더</h2>
+<p class="lead">2026 정규시즌 720경기 종료 · 타이틀 확정</p>
+
+<div class="kpis">
+<div class="kpi bt-kia"><b>45</b><span>홈런왕 김도영</span></div>
+<div class="kpi bt-lt"><b>211</b><span>최다안타 신기록</span></div>
+<div class="kpi bt-ss"><b>2관왕</b><span>구자욱·김도영</span></div>
+</div>
+
+<h3>부문별 1위</h3>
+<div class="chart" role="img" aria-label="부문별 1위 가로막대: 타율 구자욱 0.371, 출루율 구자욱 0.458, 장타율 김도영 0.647, 홈런 김도영 45개, 타점 힐리어드 139, 안타 레이예스 211">
+<div class="brow bt-ss"><span class="bl">타율</span><span class="bn">구자욱</span><div class="bar"><div class="fill" style="--w:92.8%"></div></div><b class="bv">0.371</b></div><div class="brow bt-ss"><span class="bl">출루율</span><span class="bn">구자욱</span><div class="bar"><div class="fill" style="--w:91.6%"></div></div><b class="bv">0.458</b></div><div class="brow bt-kia"><span class="bl">장타율</span><span class="bn">김도영</span><div class="bar"><div class="fill" style="--w:92.4%"></div></div><b class="bv">0.647</b></div><div class="brow bt-kia"><span class="bl">홈런</span><span class="bn">김도영</span><div class="bar"><div class="fill" style="--w:90.0%"></div></div><b class="bv">45개</b></div><div class="brow bt-kt"><span class="bl">타점</span><span class="bn">힐리어드</span><div class="bar"><div class="fill" style="--w:92.7%"></div></div><b class="bv">139</b></div><div class="brow bt-lt"><span class="bl">안타</span><span class="bn">레이예스</span><div class="bar"><div class="fill" style="--w:95.9%"></div></div><b class="bv">211</b></div>
+<p class="note">막대 길이는 부문별 기준치 대비 상대 비율</p>
+</div>
+
+<h3>안타 신기록</h3>
+<div class="chart bt-lt" role="img" aria-label="레이예스 211안타, 종전 기록 202안타 비교">
+<div class="brow"><span class="bl">종전</span><span class="bn">기록</span><div class="bar"><div class="fill dim" style="--w:91.8%"></div></div><b class="bv">202</b></div>
+<div class="brow"><span class="bl">2026</span><span class="bn">레이예스</span><div class="bar"><div class="fill" style="--w:95.9%"></div></div><b class="bv">211</b></div>
+<div class="delta">+9 ▲</div>
+</div>
+
+<h3>다관왕</h3>
+<div class="crowns" role="img" aria-label="김도영 홈런·장타율 2관왕, 구자욱 타율·출루율 2관왕">
+<div class="crown bt-kia"><span class="dots"><i></i><i></i></span><b>김도영</b><em>홈런 · 장타율</em></div>
+<div class="crown bt-ss"><span class="dots"><i></i><i></i></span><b>구자욱</b><em>타율 · 출루율</em></div>
+</div>
+
+<h3>대표 타자</h3>
+<div class="pcards">
+<div class="pcard bt-kia"><svg class="emb" viewBox="0 0 48 52" role="img" aria-label="K 엠블럼"><path d="M24 2 44 9v18c0 12-9 20-20 23C13 47 4 39 4 27V9z" fill="var(--tc)" stroke="#fff" stroke-opacity=".7" stroke-width="2"/><path d="M10 12q8 14 0 28M38 12q-8 14 0 28" stroke="#fff" stroke-opacity=".5" stroke-dasharray="2 3" fill="none"/><text x="24" y="33" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">K</text></svg><div class="pno">5</div><svg class="pl" viewBox="0 0 60 80" aria-hidden="true"><circle cx="30" cy="14" r="9" fill="#f2d3b3"/><path d="M19 8h22a11 11 0 0 0-22 0z" fill="rgba(0,0,0,.45)"/><path d="M12 80V44q0-9 11-12h14q11 3 11 12v36z" fill="rgba(255,255,255,.88)"/><path d="M24 32q6 6 12 0" stroke="var(--tc)" stroke-width="3" fill="none"/></svg><div class="pname">김도영</div><div class="pteam">KIA 타이거즈</div><div class="pbig">45<small>홈런</small></div><div class="psub">장타율 0.647</div></div>
+<div class="pcard bt-ss"><svg class="emb" viewBox="0 0 48 52" role="img" aria-label="S 엠블럼"><path d="M24 2 44 9v18c0 12-9 20-20 23C13 47 4 39 4 27V9z" fill="var(--tc)" stroke="#fff" stroke-opacity=".7" stroke-width="2"/><path d="M10 12q8 14 0 28M38 12q-8 14 0 28" stroke="#fff" stroke-opacity=".5" stroke-dasharray="2 3" fill="none"/><text x="24" y="33" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">S</text></svg><div class="pno">8</div><svg class="pl" viewBox="0 0 60 80" aria-hidden="true"><circle cx="30" cy="14" r="9" fill="#f2d3b3"/><path d="M19 8h22a11 11 0 0 0-22 0z" fill="rgba(0,0,0,.45)"/><path d="M12 80V44q0-9 11-12h14q11 3 11 12v36z" fill="rgba(255,255,255,.88)"/><path d="M24 32q6 6 12 0" stroke="var(--tc)" stroke-width="3" fill="none"/></svg><div class="pname">구자욱</div><div class="pteam">삼성 라이온즈</div><div class="pbig">0.371<small>타율</small></div><div class="psub">출루율 0.458</div></div>
+<div class="pcard bt-lt"><svg class="emb" viewBox="0 0 48 52" role="img" aria-label="L 엠블럼"><path d="M24 2 44 9v18c0 12-9 20-20 23C13 47 4 39 4 27V9z" fill="var(--tc)" stroke="#fff" stroke-opacity=".7" stroke-width="2"/><path d="M10 12q8 14 0 28M38 12q-8 14 0 28" stroke="#fff" stroke-opacity=".5" stroke-dasharray="2 3" fill="none"/><text x="24" y="33" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">L</text></svg><div class="pno">9</div><svg class="pl" viewBox="0 0 60 80" aria-hidden="true"><circle cx="30" cy="14" r="9" fill="#f2d3b3"/><path d="M19 8h22a11 11 0 0 0-22 0z" fill="rgba(0,0,0,.45)"/><path d="M12 80V44q0-9 11-12h14q11 3 11 12v36z" fill="rgba(255,255,255,.88)"/><path d="M24 32q6 6 12 0" stroke="var(--tc)" stroke-width="3" fill="none"/></svg><div class="pname">레이예스</div><div class="pteam">롯데 자이언츠</div><div class="pbig">211<small>안타</small></div><div class="psub">단일시즌 신기록</div></div>
+<div class="pcard bt-kt"><svg class="emb" viewBox="0 0 48 52" role="img" aria-label="K 엠블럼"><path d="M24 2 44 9v18c0 12-9 20-20 23C13 47 4 39 4 27V9z" fill="var(--tc)" stroke="#fff" stroke-opacity=".7" stroke-width="2"/><path d="M10 12q8 14 0 28M38 12q-8 14 0 28" stroke="#fff" stroke-opacity=".5" stroke-dasharray="2 3" fill="none"/><text x="24" y="33" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">K</text></svg><div class="pno">7</div><svg class="pl" viewBox="0 0 60 80" aria-hidden="true"><circle cx="30" cy="14" r="9" fill="#f2d3b3"/><path d="M19 8h22a11 11 0 0 0-22 0z" fill="rgba(0,0,0,.45)"/><path d="M12 80V44q0-9 11-12h14q11 3 11 12v36z" fill="rgba(255,255,255,.88)"/><path d="M24 32q6 6 12 0" stroke="var(--tc)" stroke-width="3" fill="none"/></svg><div class="pname">힐리어드</div><div class="pteam">kt wiz</div><div class="pbig">139<small>타점</small></div><div class="psub">타점 1위</div></div>
+</div>
+<p class="note">등번호는 예시 · 공식 기록: koreabaseball.com</p>
+<p class="note">최정(SSG) 전반기 19홈런 · MVP는 11월 시상식 발표</p>
+</section>
+
+<section id="pitchers" class="sec">
+<h2 class="sec-title"><span class="no">04</span>투수 부문 리더 ⚾</h2>
+
+<h3>🔥 시즌 기록 막대</h3>
+<div class="pc-chart t-doosan" role="img" aria-label="두산 곽빈 5월 말 탈삼진 66개">
+<h3>곽빈 탈삼진 (5월 말)</h3>
+<div class="bars">
+<div class="bar"><span>곽빈 두산</span><span class="track"><span class="fill" style="--w:100%"></span></span><b>66K</b></div>
+</div></div>
+<div class="pc-chart t-doosan" role="img" aria-label="최민석 6월 월간 기록 막대 차트: 이닝 32, 탈삼진 28, 승 4, 경기 5">
+<h3>최민석 6월 월간</h3>
+<div class="bars">
+<div class="bar"><span>이닝</span><span class="track"><span class="fill" style="--w:100%"></span></span><b>32</b></div>
+<div class="bar"><span>탈삼진</span><span class="track"><span class="fill" style="--w:87.5%"></span></span><b>28</b></div>
+<div class="bar"><span>경기</span><span class="track"><span class="fill" style="--w:15.6%"></span></span><b>5</b></div>
+<div class="bar"><span>승</span><span class="track"><span class="fill" style="--w:12.5%"></span></span><b>4</b></div>
+</div></div>
+<div class="pc-chart t-kia" role="img" aria-label="KIA 전상현 5시즌 연속 두 자릿수 홀드, 2022년부터">
+<h3>전상현 연속 두 자릿수 홀드</h3>
+<svg viewBox="0 0 300 70"><g>
+<circle cx="30" cy="35" r="18" fill="var(--tc)"/><circle cx="90" cy="35" r="18" fill="var(--tc)"/><circle cx="150" cy="35" r="18" fill="var(--tc)"/><circle cx="210" cy="35" r="18" fill="var(--tc)"/><circle cx="270" cy="35" r="18" fill="var(--tc)"/>
+<g fill="#fff" font-size="11" font-weight="700" text-anchor="middle"><text x="30" y="39">22</text><text x="90" y="39">23</text><text x="150" y="39">24</text><text x="210" y="39">25</text><text x="270" y="39">26</text></g></g></svg>
+<div class="pc-big">5시즌 <span class="pc-lbl">8/18 달성</span></div>
+</div>
+
+<h3>🏅 대표 투수 카드</h3>
+<div class="pc-grid">
+<div class="pc-card t-doosan" role="img" aria-label="두산 곽빈, 탈삼진 66개">
+<svg viewBox="0 0 100 110"><circle cx="50" cy="26" r="14" fill="#f2c9a0"/><path d="M34 22q16-18 32 0z" fill="var(--tc)"/><path d="M22 108q0-52 28-52t28 52z" fill="var(--tc)" stroke="#fff" stroke-width="2"/><text x="50" y="92" fill="#fff" font-size="18" font-weight="900" text-anchor="middle">DS</text></svg>
+<h3>곽빈</h3><div class="pc-team">두산 베어스</div><div class="pc-big">66</div><div class="pc-lbl">탈삼진 · MVP 후보</div></div>
+<div class="pc-card t-kia" role="img" aria-label="KIA 애덤 올러, 다승 경쟁 6승">
+<svg viewBox="0 0 100 110"><circle cx="50" cy="26" r="14" fill="#f2c9a0"/><path d="M34 22q16-18 32 0z" fill="var(--tc)"/><path d="M22 108q0-52 28-52t28 52z" fill="var(--tc)" stroke="#fff" stroke-width="2"/><text x="50" y="92" fill="#fff" font-size="18" font-weight="900" text-anchor="middle">KIA</text></svg>
+<h3>애덤 올러</h3><div class="pc-team">KIA 타이거즈</div><div class="pc-big">6승</div><div class="pc-lbl">다승 1위 경쟁</div></div>
+<div class="pc-card t-samsung" role="img" aria-label="삼성 아리엘 후라도, 에이스 경쟁">
+<svg viewBox="0 0 100 110"><circle cx="50" cy="26" r="14" fill="#f2c9a0"/><path d="M34 22q16-18 32 0z" fill="var(--tc)"/><path d="M22 108q0-52 28-52t28 52z" fill="var(--tc)" stroke="#fff" stroke-width="2"/><text x="50" y="92" fill="#fff" font-size="18" font-weight="900" text-anchor="middle">SL</text></svg>
+<h3>아리엘 후라도</h3><div class="pc-team">삼성 라이온즈</div><div class="pc-big">ACE</div><div class="pc-lbl">에이스 경쟁</div></div>
+<div class="pc-card t-doosan" role="img" aria-label="두산 최민석, 6월 평균자책 0.84">
+<svg viewBox="0 0 100 110"><circle cx="50" cy="26" r="14" fill="#f2c9a0"/><path d="M34 22q16-18 32 0z" fill="var(--tc)"/><path d="M22 108q0-52 28-52t28 52z" fill="var(--tc)" stroke="#fff" stroke-width="2"/><text x="50" y="92" fill="#fff" font-size="18" font-weight="900" text-anchor="middle">DS</text></svg>
+<h3>최민석</h3><div class="pc-team">두산 베어스</div><div class="pc-big">0.84</div><div class="pc-lbl">6월 평균자책</div></div>
+</div>
+
+<h3>🏆 시상</h3>
+<div class="pc-pills">
+<span class="pc-pill t-lg">골든글러브 후보 79명</span>
+<span class="pc-pill t-lg">포지션별 10명</span>
+<span class="pc-pill t-lg">🗓 12/8 롯데호텔 월드</span>
+<span class="pc-pill t-doosan">MVP 후보 곽빈</span>
+<span class="pc-pill t-kia">MVP 후보 김도영</span>
+<span class="pc-pill t-lotte">MVP 후보 레이예스</span>
+</div>
+<div class="pc-chart" role="img" aria-label="신인왕 투수 후보 6명: LG 우강훈, SSG 김민준, 삼성 장찬희, 롯데 박정민, KIA 김태형, 키움 박준현">
+<h3>🌟 신인왕 투수 후보 6명</h3>
+<div class="pc-pills">
+<span class="pc-pill t-lg">LG 우강훈</span><span class="pc-pill t-ssg">SSG 김민준</span><span class="pc-pill t-samsung">삼성 장찬희</span><span class="pc-pill t-lotte">롯데 박정민</span><span class="pc-pill t-kia">KIA 김태형</span><span class="pc-pill t-kiwoom">키움 박준현</span>
+</div></div>
+<p class="note">📊 최종 순위 koreabaseball.com</p>
+</section>
+
+<section id="mvp" class="sec"><h2 class="sec-title"><span class="no">★</span>MVP 예상 · Claude의 추론</h2>
+<p class="lead">공식 기록 기반 추론이며 실제 시상 결과는 11월 시상식에서 발표됩니다.</p>
+<div class="mvp-pick t-kt"><div class="mvp-crown">👑 MY PICK</div><div class="mvp-name">힐리어드</div><div class="mvp-team">kt wiz · 타점왕 139 · 홈런 44</div></div>
+<h3 class="sub grp bat">왜 힐리어드? 이유 3가지</h3>
+<div class="grid g3 mvp-why">
+<div class="card t-kt"><span class="mvp-n">1</span><h3>우승팀 효과</h3><p class="mvp-big">90승</p><p>정규시즌 1위 kt. 1위팀 선수가 표심에 유리하다는 추론</p></div>
+<div class="card t-kt"><span class="mvp-n">2</span><h3>득점 생산의 핵심</h3><p class="mvp-big">139타점</p><p>타점 1위 · 홈런 44개로 1위와 1개 차</p></div>
+<div class="card t-kt"><span class="mvp-n">3</span><h3>경쟁자 약점</h3><p class="mvp-big">3위 · 2위</p><p>김도영 KIA 3위, 구자욱 삼성 2위. 타이틀은 많아도 팀 성적에서 밀림</p></div>
+</div>
+<h3 class="sub grp pit">MVP 후보 5명 · 추론 점수</h3>
+<div class="chart mvp-chart" role="img" aria-label="MVP 후보별 추론 점수: 힐리어드 9, 김도영 8, 구자욱 7, 레이예스 5, 곽빈 4">
+<div class="brow t-kt"><span class="bl">힐리어드 · kt wiz</span><div class="bar"><i class="fill" style="--w:90%"></i></div><b class="bv">9</b></div>
+<div class="brow t-kia"><span class="bl">김도영 · KIA 타이거즈</span><div class="bar"><i class="fill" style="--w:80%"></i></div><b class="bv">8</b></div>
+<div class="brow t-samsung"><span class="bl">구자욱 · 삼성 라이온즈</span><div class="bar"><i class="fill" style="--w:70%"></i></div><b class="bv">7</b></div>
+<div class="brow t-lotte"><span class="bl">레이예스 · 롯데 자이언츠</span><div class="bar"><i class="fill" style="--w:50%"></i></div><b class="bv">5</b></div>
+<div class="brow t-doosan"><span class="bl">곽빈 · 두산 베어스</span><div class="bar"><i class="fill" style="--w:40%"></i></div><b class="bv">4</b></div>
+</div>
+<div class="grid g2 mvp-cands">
+<div class="card t-kia"><h3>김도영 · 차선책</h3><p>홈런 45 · 장타율 .647 · 2관왕. 기록 임팩트는 최상</p></div>
+<div class="card t-samsung"><h3>구자욱 · 변수</h3><p>타율 .371 · 출루율 .458 · 2관왕. 삼성이 한국시리즈에서 우승하면 상승</p></div>
+</div>
+<p class="note">추론 점수 = 기록·팀 성적·화제성을 종합한 Claude의 주관 추정(10점 만점), 공식 지표 아님. 곽빈 데이터는 5월 말 기준.</p>
+</section>
+<section id="players" class="sec">
+<h2 class="sec-title"><span class="no">05</span>신인·외국인·이적 시장</h2>
+
+<div class="grid g2">
+<div class="stat"><b class="num">9명</b><span>신인상 후보</span></div>
+<div class="stat"><b class="num">3+1</b><span>외국인 3 + 아시아쿼터 1</span></div>
+</div>
+
+<h3>🌟 신인상 후보</h3>
+<div class="donut-wrap">
+<svg viewBox="0 0 42 42" role="img" aria-label="신인상 후보 투수 6명, 야수 3명 도넛 차트"><circle cx="21" cy="21" r="15.915" fill="none" stroke="#39a0ff" stroke-width="6" stroke-dasharray="66.7 33.3" transform="rotate(-90 21 21)"/><circle cx="21" cy="21" r="15.915" fill="none" stroke="#ff4fa3" stroke-width="6" stroke-dasharray="33.3 66.7" stroke-dashoffset="-66.7" transform="rotate(-90 21 21)"/><text x="21" y="24" text-anchor="middle" font-size="9" font-weight="800" fill="#fff">9명</text></svg>
+<div class="lg-i"><span style="color:#39a0ff">●</span> 투수 6명 <br><span style="color:#ff4fa3">●</span> 야수 3명</div>
+</div>
+<div class="pcards"><div class="pcard t-lg"><span class="no">#1</span><svg viewBox="0 0 70 90" aria-hidden="true"><circle cx="35" cy="20" r="11" fill="#fff" opacity=".9"/><path d="M12 88c0-26 6-48 23-48s23 22 23 48z" fill="#fff" opacity=".9"/><text x="35" y="74" text-anchor="middle" font-size="16" font-weight="800" fill="#0b0f1a"></text></svg><b>우강훈</b><small>투수 · LG 트윈스</small><span class="big">후보</span></div><div class="pcard t-ssg"><span class="no">#2</span><svg viewBox="0 0 70 90" aria-hidden="true"><circle cx="35" cy="20" r="11" fill="#fff" opacity=".9"/><path d="M12 88c0-26 6-48 23-48s23 22 23 48z" fill="#fff" opacity=".9"/><text x="35" y="74" text-anchor="middle" font-size="16" font-weight="800" fill="#0b0f1a"></text></svg><b>김민준</b><small>투수 · SSG 랜더스</small><span class="big">후보</span></div><div class="pcard t-samsung"><span class="no">#3</span><svg viewBox="0 0 70 90" aria-hidden="true"><circle cx="35" cy="20" r="11" fill="#fff" opacity=".9"/><path d="M12 88c0-26 6-48 23-48s23 22 23 48z" fill="#fff" opacity=".9"/><text x="35" y="74" text-anchor="middle" font-size="16" font-weight="800" fill="#0b0f1a"></text></svg><b>장찬희</b><small>투수 · 삼성 라이온즈</small><span class="big">후보</span></div><div class="pcard t-lotte"><span class="no">#4</span><svg viewBox="0 0 70 90" aria-hidden="true"><circle cx="35" cy="20" r="11" fill="#fff" opacity=".9"/><path d="M12 88c0-26 6-48 23-48s23 22 23 48z" fill="#fff" opacity=".9"/><text x="35" y="74" text-anchor="middle" font-size="16" font-weight="800" fill="#0b0f1a"></text></svg><b>박정민</b><small>투수 · 롯데 자이언츠</small><span class="big">후보</span></div><div class="pcard t-kia"><span class="no">#5</span><svg viewBox="0 0 70 90" aria-hidden="true"><circle cx="35" cy="20" r="11" fill="#fff" opacity=".9"/><path d="M12 88c0-26 6-48 23-48s23 22 23 48z" fill="#fff" opacity=".9"/><text x="35" y="74" text-anchor="middle" font-size="16" font-weight="800" fill="#0b0f1a"></text></svg><b>김태형</b><small>투수 · KIA 타이거즈</small><span class="big">후보</span></div><div class="pcard t-kiwoom"><span class="no">#6</span><svg viewBox="0 0 70 90" aria-hidden="true"><circle cx="35" cy="20" r="11" fill="#fff" opacity=".9"/><path d="M12 88c0-26 6-48 23-48s23 22 23 48z" fill="#fff" opacity=".9"/><text x="35" y="74" text-anchor="middle" font-size="16" font-weight="800" fill="#0b0f1a"></text></svg><b>박준현</b><small>투수 · 키움 히어로즈</small><span class="big">후보</span></div><div class="pcard t-lg"><span class="no">#7</span><svg viewBox="0 0 70 90" aria-hidden="true"><circle cx="35" cy="20" r="11" fill="#fff" opacity=".9"/><path d="M12 88c0-26 6-48 23-48s23 22 23 48z" fill="#fff" opacity=".9"/><text x="35" y="74" text-anchor="middle" font-size="16" font-weight="800" fill="#0b0f1a"></text></svg><b>문정빈</b><small>야수 · LG 트윈스</small><span class="big">후보</span></div><div class="pcard t-hanwha"><span class="no">#8</span><svg viewBox="0 0 70 90" aria-hidden="true"><circle cx="35" cy="20" r="11" fill="#fff" opacity=".9"/><path d="M12 88c0-26 6-48 23-48s23 22 23 48z" fill="#fff" opacity=".9"/><text x="35" y="74" text-anchor="middle" font-size="16" font-weight="800" fill="#0b0f1a"></text></svg><b>허인서</b><small>야수 · 한화 이글스</small><span class="big">후보</span></div><div class="pcard t-kt"><span class="no">#9</span><svg viewBox="0 0 70 90" aria-hidden="true"><circle cx="35" cy="20" r="11" fill="#fff" opacity=".9"/><path d="M12 88c0-26 6-48 23-48s23 22 23 48z" fill="#fff" opacity=".9"/><text x="35" y="74" text-anchor="middle" font-size="16" font-weight="800" fill="#0b0f1a"></text></svg><b>류현인</b><small>야수 · kt wiz</small><span class="big">후보</span></div></div>
+<div class="chart"><div class="bar t-lg" role="img" aria-label="LG 신인상 후보 2명"><span class="lb">LG 트윈스</span><span class="trk"><i class="fill" style="--w:100%"></i></span><span class="v">2명</span></div><div class="bar t-ssg" role="img" aria-label="SSG 신인상 후보 1명"><span class="lb">SSG 랜더스</span><span class="trk"><i class="fill" style="--w:50%"></i></span><span class="v">1명</span></div><div class="bar t-samsung" role="img" aria-label="삼성 신인상 후보 1명"><span class="lb">삼성 라이온즈</span><span class="trk"><i class="fill" style="--w:50%"></i></span><span class="v">1명</span></div><div class="bar t-lotte" role="img" aria-label="롯데 신인상 후보 1명"><span class="lb">롯데 자이언츠</span><span class="trk"><i class="fill" style="--w:50%"></i></span><span class="v">1명</span></div><div class="bar t-kia" role="img" aria-label="KIA 신인상 후보 1명"><span class="lb">KIA 타이거즈</span><span class="trk"><i class="fill" style="--w:50%"></i></span><span class="v">1명</span></div><div class="bar t-kiwoom" role="img" aria-label="키움 신인상 후보 1명"><span class="lb">키움 히어로즈</span><span class="trk"><i class="fill" style="--w:50%"></i></span><span class="v">1명</span></div><div class="bar t-hanwha" role="img" aria-label="한화 신인상 후보 1명"><span class="lb">한화 이글스</span><span class="trk"><i class="fill" style="--w:50%"></i></span><span class="v">1명</span></div><div class="bar t-kt" role="img" aria-label="KT 신인상 후보 1명"><span class="lb">kt wiz</span><span class="trk"><i class="fill" style="--w:50%"></i></span><span class="v">1명</span></div></div>
+<p class="note">11월 KBO 시상식 발표</p>
+
+<h3>🌍 구단별 외국인</h3>
+<div class="badge-row"><div class="tm t-lg"><svg viewBox="0 0 56 56" aria-hidden="true"><path d="M28 3 51 11v18c0 12-10 21-23 25C15 50 5 41 5 29V11z" class="t-lg" style="fill:var(--tc)" stroke="#fff" stroke-width="2"/><path d="M12 14c6 6 6 22 0 28M44 14c-6 6-6 22 0 28" stroke="#fff" stroke-width="1.2" fill="none" stroke-dasharray="2 2.5" opacity=".7"/><text x="28" y="34" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">LG</text></svg><b>LG</b><span class="chip re">전원 재계약</span></div><div class="tm t-hanwha"><svg viewBox="0 0 56 56" aria-hidden="true"><path d="M28 3 51 11v18c0 12-10 21-23 25C15 50 5 41 5 29V11z" class="t-hanwha" style="fill:var(--tc)" stroke="#fff" stroke-width="2"/><path d="M12 14c6 6 6 22 0 28M44 14c-6 6-6 22 0 28" stroke="#fff" stroke-width="1.2" fill="none" stroke-dasharray="2 2.5" opacity=".7"/><text x="28" y="34" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">한</text></svg><b>한화</b><span class="chip sw">전원 교체</span></div><div class="tm t-ssg"><svg viewBox="0 0 56 56" aria-hidden="true"><path d="M28 3 51 11v18c0 12-10 21-23 25C15 50 5 41 5 29V11z" class="t-ssg" style="fill:var(--tc)" stroke="#fff" stroke-width="2"/><path d="M12 14c6 6 6 22 0 28M44 14c-6 6-6 22 0 28" stroke="#fff" stroke-width="1.2" fill="none" stroke-dasharray="2 2.5" opacity=".7"/><text x="28" y="34" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">S</text></svg><b>SSG</b><span class="chip new">신규1·재계약2</span></div><div class="tm t-samsung"><svg viewBox="0 0 56 56" aria-hidden="true"><path d="M28 3 51 11v18c0 12-10 21-23 25C15 50 5 41 5 29V11z" class="t-samsung" style="fill:var(--tc)" stroke="#fff" stroke-width="2"/><path d="M12 14c6 6 6 22 0 28M44 14c-6 6-6 22 0 28" stroke="#fff" stroke-width="1.2" fill="none" stroke-dasharray="2 2.5" opacity=".7"/><text x="28" y="34" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">삼</text></svg><b>삼성</b><span class="chip new">매닝 영입</span></div><div class="tm t-kt"><svg viewBox="0 0 56 56" aria-hidden="true"><path d="M28 3 51 11v18c0 12-10 21-23 25C15 50 5 41 5 29V11z" class="t-kt" style="fill:var(--tc)" stroke="#fff" stroke-width="2"/><path d="M12 14c6 6 6 22 0 28M44 14c-6 6-6 22 0 28" stroke="#fff" stroke-width="1.2" fill="none" stroke-dasharray="2 2.5" opacity=".7"/><text x="28" y="34" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">KT</text></svg><b>KT</b><span class="chip new">사우어 영입</span></div><div class="tm t-lotte"><svg viewBox="0 0 56 56" aria-hidden="true"><path d="M28 3 51 11v18c0 12-10 21-23 25C15 50 5 41 5 29V11z" class="t-lotte" style="fill:var(--tc)" stroke="#fff" stroke-width="2"/><path d="M12 14c6 6 6 22 0 28M44 14c-6 6-6 22 0 28" stroke="#fff" stroke-width="1.2" fill="none" stroke-dasharray="2 2.5" opacity=".7"/><text x="28" y="34" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">롯</text></svg><b>롯데</b><span class="chip re">레이예스 MVP후보</span></div><div class="tm t-doosan"><svg viewBox="0 0 56 56" aria-hidden="true"><path d="M28 3 51 11v18c0 12-10 21-23 25C15 50 5 41 5 29V11z" class="t-doosan" style="fill:var(--tc)" stroke="#fff" stroke-width="2"/><path d="M12 14c6 6 6 22 0 28M44 14c-6 6-6 22 0 28" stroke="#fff" stroke-width="1.2" fill="none" stroke-dasharray="2 2.5" opacity=".7"/><text x="28" y="34" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">두</text></svg><b>두산</b><span class="chip re">곽빈 MVP후보</span></div></div>
+<div class="bar t-ssg" role="img" aria-label="SSG 외국인 구성 신규 1명 재계약 2명"><span class="lb">SSG 랜더스</span><span class="trk"><i class="fill" style="--w:100%"></i></span><span class="v">1+2</span></div>
+<p class="note">SSG 앤더슨 MLB 진출 · 시즌 전 보도 기준</p>
+
+<h3>👋 은퇴</h3>
+<div class="tl-item"><b>박병호 · 오재일 · 진해수</b> 2025년 11월 은퇴 선언 (참고)</div>
+
+<p class="note">출처 KBO 공식 koreabaseball.com</p>
+</section>
+
+<section id="rules" class="sec">
+<h2 class="sec-title"><span class="no">06</span>2026 규정 &amp; 용어</h2>
+<div class="rules-grid"><div class="rule"><span class="ic">🤖</span><b>ABS 로봇심판</b><em>2024~ 볼·스트라이크 자동 판정</em><span class="yr">2024</span></div><div class="rule"><span class="ic">⏱️</span><b>피치클락</b><em>2026 정식 도입</em><span class="yr">2026</span></div><div class="rule"><span class="ic">🔟</span><b>연장전 11회</b><em>12회에서 단축</em><span class="yr">12→11</span></div><div class="rule"><span class="ic">🌏</span><b>외국인 4명</b><em>3명 + 아시아쿼터 1</em><span class="yr">3+1</span></div></div>
+<div class="badges" aria-label="10개 구단 엠블럼풍 배지"><span class="t-lg bdg"><svg viewBox="0 0 64 72" role="img" aria-label="LG 엠블럼풍 배지"><path d="M32 3 59 13v26c0 17-12 27-27 31C17 66 5 56 5 39V13z" fill="var(--tc)" stroke="#fff" stroke-width="2.5"/><path d="M14 17q9 14 0 28M50 17q-9 14 0 28" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="3 3" opacity=".7"/><text x="32" y="43" text-anchor="middle" font-size="15" font-weight="900" fill="#fff">LG</text></svg><b>LG</b></span><span class="t-hanwha bdg"><svg viewBox="0 0 64 72" role="img" aria-label="한화 엠블럼풍 배지"><path d="M32 3 59 13v26c0 17-12 27-27 31C17 66 5 56 5 39V13z" fill="var(--tc)" stroke="#fff" stroke-width="2.5"/><path d="M14 17q9 14 0 28M50 17q-9 14 0 28" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="3 3" opacity=".7"/><text x="32" y="43" text-anchor="middle" font-size="20" font-weight="900" fill="#fff">한</text></svg><b>한화</b></span><span class="t-ssg bdg"><svg viewBox="0 0 64 72" role="img" aria-label="SSG 엠블럼풍 배지"><path d="M32 3 59 13v26c0 17-12 27-27 31C17 66 5 56 5 39V13z" fill="var(--tc)" stroke="#fff" stroke-width="2.5"/><path d="M14 17q9 14 0 28M50 17q-9 14 0 28" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="3 3" opacity=".7"/><text x="32" y="43" text-anchor="middle" font-size="12" font-weight="900" fill="#fff">SSG</text></svg><b>SSG</b></span><span class="t-samsung bdg"><svg viewBox="0 0 64 72" role="img" aria-label="삼성 엠블럼풍 배지"><path d="M32 3 59 13v26c0 17-12 27-27 31C17 66 5 56 5 39V13z" fill="var(--tc)" stroke="#fff" stroke-width="2.5"/><path d="M14 17q9 14 0 28M50 17q-9 14 0 28" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="3 3" opacity=".7"/><text x="32" y="43" text-anchor="middle" font-size="20" font-weight="900" fill="#fff">삼</text></svg><b>삼성</b></span><span class="t-nc bdg"><svg viewBox="0 0 64 72" role="img" aria-label="NC 엠블럼풍 배지"><path d="M32 3 59 13v26c0 17-12 27-27 31C17 66 5 56 5 39V13z" fill="var(--tc)" stroke="#fff" stroke-width="2.5"/><path d="M14 17q9 14 0 28M50 17q-9 14 0 28" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="3 3" opacity=".7"/><text x="32" y="43" text-anchor="middle" font-size="15" font-weight="900" fill="#fff">NC</text></svg><b>NC</b></span><span class="t-kt bdg"><svg viewBox="0 0 64 72" role="img" aria-label="KT 엠블럼풍 배지"><path d="M32 3 59 13v26c0 17-12 27-27 31C17 66 5 56 5 39V13z" fill="var(--tc)" stroke="#fff" stroke-width="2.5"/><path d="M14 17q9 14 0 28M50 17q-9 14 0 28" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="3 3" opacity=".7"/><text x="32" y="43" text-anchor="middle" font-size="15" font-weight="900" fill="#fff">KT</text></svg><b>KT</b></span><span class="t-lotte bdg"><svg viewBox="0 0 64 72" role="img" aria-label="롯데 엠블럼풍 배지"><path d="M32 3 59 13v26c0 17-12 27-27 31C17 66 5 56 5 39V13z" fill="var(--tc)" stroke="#fff" stroke-width="2.5"/><path d="M14 17q9 14 0 28M50 17q-9 14 0 28" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="3 3" opacity=".7"/><text x="32" y="43" text-anchor="middle" font-size="20" font-weight="900" fill="#fff">롯</text></svg><b>롯데</b></span><span class="t-kia bdg"><svg viewBox="0 0 64 72" role="img" aria-label="KIA 엠블럼풍 배지"><path d="M32 3 59 13v26c0 17-12 27-27 31C17 66 5 56 5 39V13z" fill="var(--tc)" stroke="#fff" stroke-width="2.5"/><path d="M14 17q9 14 0 28M50 17q-9 14 0 28" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="3 3" opacity=".7"/><text x="32" y="43" text-anchor="middle" font-size="12" font-weight="900" fill="#fff">KIA</text></svg><b>KIA</b></span><span class="t-doosan bdg"><svg viewBox="0 0 64 72" role="img" aria-label="두산 엠블럼풍 배지"><path d="M32 3 59 13v26c0 17-12 27-27 31C17 66 5 56 5 39V13z" fill="var(--tc)" stroke="#fff" stroke-width="2.5"/><path d="M14 17q9 14 0 28M50 17q-9 14 0 28" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="3 3" opacity=".7"/><text x="32" y="43" text-anchor="middle" font-size="20" font-weight="900" fill="#fff">두</text></svg><b>두산</b></span><span class="t-kiwoom bdg"><svg viewBox="0 0 64 72" role="img" aria-label="키움 엠블럼풍 배지"><path d="M32 3 59 13v26c0 17-12 27-27 31C17 66 5 56 5 39V13z" fill="var(--tc)" stroke="#fff" stroke-width="2.5"/><path d="M14 17q9 14 0 28M50 17q-9 14 0 28" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="3 3" opacity=".7"/><text x="32" y="43" text-anchor="middle" font-size="20" font-weight="900" fill="#fff">키</text></svg><b>키움</b></span></div>
+<div class="charts"><figure class="chart donut" role="img" aria-label="구단당 외국인 4명: 기존 3명, 아시아쿼터 1명"><figcaption>구단당 외국인</figcaption><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="40" fill="none" stroke="#2a2f4a" stroke-width="16"/><circle class="arc" cx="60" cy="60" r="40" fill="none" stroke="#ffd60a" stroke-width="16" stroke-dasharray="188.5 251.3" transform="rotate(-90 60 60)"/><circle class="arc" cx="60" cy="60" r="40" fill="none" stroke="#2ee6a6" stroke-width="16" stroke-dasharray="62.8 251.3" transform="rotate(0 60 60)"/><text x="60" y="68" text-anchor="middle" font-size="26" font-weight="900" fill="#fff">4명</text></svg><div class="lg"><span><i style="background:#ffd60a"></i>기존 3</span><span><i style="background:#2ee6a6"></i>아시아쿼터 1</span></div></figure><figure class="chart" role="img" aria-label="정규시즌 연장 한도: 이전 12회, 2026년 11회"><figcaption>정규시즌 연장 한도(회)</figcaption><div class="bar t-kia" style="--w:100%"><span class="bl">2025까지</span><span class="trk"><i class="fill"></i></span><b class="bv">12회</b></div><div class="bar t-lg" style="--w:92%"><span class="bl">2026</span><span class="trk"><i class="fill"></i></span><b class="bv">11회</b></div></figure></div>
+<h3>🏆 포스트시즌</h3>
+<div class="charts"><figure class="chart" role="img" aria-label="포스트시즌 단계별 최대 경기 수: 와일드카드 2, 준PO 5, PO 5, 한국시리즈 7"><figcaption>포스트시즌 최대 경기 수</figcaption><div class="bar t-kt" style="--w:29%"><span class="bl">와일드카드</span><span class="trk"><i class="fill"></i></span><b class="bv">2경기</b></div><div class="bar t-samsung" style="--w:71%"><span class="bl">준PO</span><span class="trk"><i class="fill"></i></span><b class="bv">5전3선승</b></div><div class="bar t-doosan" style="--w:71%"><span class="bl">PO</span><span class="trk"><i class="fill"></i></span><b class="bv">5전3선승</b></div><div class="bar t-lg" style="--w:100%"><span class="bl">한국시리즈</span><span class="trk"><i class="fill"></i></span><b class="bv">7전4선승</b></div></figure><figure class="chart ladder" role="img" aria-label="정규시즌 상위 5팀 포스트시즌 진출 경로"><figcaption>상위 5팀 진출 경로</figcaption><div class="bar t-kia" style="--w:100%"><span class="bl">1위</span><span class="trk"><i class="fill"></i></span><b class="bv">한국시리즈 직행</b></div><div class="bar t-samsung" style="--w:86%"><span class="bl">2위</span><span class="trk"><i class="fill"></i></span><b class="bv">플레이오프</b></div><div class="bar t-doosan" style="--w:72%"><span class="bl">3위</span><span class="trk"><i class="fill"></i></span><b class="bv">준PO</b></div><div class="bar t-kt" style="--w:58%"><span class="bl">4위</span><span class="trk"><i class="fill"></i></span><b class="bv">WC +1승</b></div><div class="bar t-nc" style="--w:44%"><span class="bl">5위</span><span class="trk"><i class="fill"></i></span><b class="bv">WC</b></div></figure></div>
+<div class="wc"><span>4위 <b>1승 ▶</b></span><span>vs</span><span>5위 <b>최대 2경기</b></span></div>
+<div class="pcards"><div class="pcard t-lg"><svg viewBox="0 0 120 150" role="img" aria-label="wRC+ 100이 평균임을 보여주는 선수 카드"><circle cx="60" cy="36" r="14" fill="#f2d3b5"/><path d="M45 32q15-22 30 0z" fill="#111"/><path d="M73 31h16" stroke="#111" stroke-width="4"/><path d="M36 62q24-14 48 0l8 52H28z" fill="#fff"/><path d="M36 62q24-14 48 0l-6 10q-18-8-36 0z" fill="var(--tc)"/><path d="M28 114h64v26H28z" fill="#ddd"/><path d="M92 70l20-34" stroke="#c9a46b" stroke-width="5" stroke-linecap="round"/><text x="60" y="100" text-anchor="middle" font-size="26" font-weight="900" fill="#111">1</text></svg><div class="pc-b"><span class="pc-n">100</span><span class="pc-l">wRC+ 평균</span><small>리그·구장 보정</small></div></div><div class="pcard t-hanwha"><svg viewBox="0 0 120 150" role="img" aria-label="퀄리티스타트 기준 선수 카드"><circle cx="60" cy="36" r="14" fill="#f2d3b5"/><path d="M45 32q15-22 30 0z" fill="#111"/><path d="M73 31h16" stroke="#111" stroke-width="4"/><path d="M36 62q24-14 48 0l8 52H28z" fill="#fff"/><path d="M36 62q24-14 48 0l-6 10q-18-8-36 0z" fill="var(--tc)"/><path d="M28 114h64v26H28z" fill="#ddd"/><path d="M92 70l20-34" stroke="#c9a46b" stroke-width="5" stroke-linecap="round"/><text x="60" y="100" text-anchor="middle" font-size="26" font-weight="900" fill="#111">6</text></svg><div class="pc-b"><span class="pc-n">6IP·3ER↓</span><span class="pc-l">QS</span><small>선발 퀄리티스타트</small></div></div><div class="pcard t-samsung"><svg viewBox="0 0 120 150" role="img" aria-label="트리플크라운 선수 카드"><circle cx="60" cy="36" r="14" fill="#f2d3b5"/><path d="M45 32q15-22 30 0z" fill="#111"/><path d="M73 31h16" stroke="#111" stroke-width="4"/><path d="M36 62q24-14 48 0l8 52H28z" fill="#fff"/><path d="M36 62q24-14 48 0l-6 10q-18-8-36 0z" fill="var(--tc)"/><path d="M28 114h64v26H28z" fill="#ddd"/><path d="M92 70l20-34" stroke="#c9a46b" stroke-width="5" stroke-linecap="round"/><text x="60" y="100" text-anchor="middle" font-size="26" font-weight="900" fill="#111">3</text></svg><div class="pc-b"><span class="pc-n">3관왕</span><span class="pc-l">트리플크라운</span><small>타율·홈런·타점 1위</small></div></div></div>
+<h3>📖 용어 30 <small>카드를 눌러 뒤집기</small></h3>
+<h4 class="gh">타격 <small>6</small></h4><div class="flips"><div class="flip" tabindex="0"><div class="fi"><span class="ff">타율</span><span class="fb">안타 ÷ 타수</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">출루율(OBP)</span><span class="fb">(안타+볼넷+사구)÷(타수+볼넷+사구+희생플라이)</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">장타율(SLG)</span><span class="fb">총루타 ÷ 타수</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">OPS</span><span class="fb">출루율 + 장타율</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">BABIP</span><span class="fb">인플레이 타구의 안타 비율</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">wRC+</span><span class="fb">득점 생산력, 100이 평균</span></div></div></div><h4 class="gh">투수 <small>6</small></h4><div class="flips"><div class="flip" tabindex="0"><div class="fi"><span class="ff">평균자책점(ERA)</span><span class="fb">9이닝당 자책점</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">WHIP</span><span class="fb">이닝당 볼넷+피안타</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">FIP</span><span class="fb">수비 영향 제외 지표</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">퀄리티스타트(QS)</span><span class="fb">6이닝 이상 3자책 이하</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">홀드</span><span class="fb">중간계투 리드 유지</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">세이브</span><span class="fb">조건 충족 리드 마무리</span></div></div></div><h4 class="gh">종합 <small>3</small></h4><div class="flips"><div class="flip" tabindex="0"><div class="fi"><span class="ff">WAR</span><span class="fb">대체선수 대비 승리 기여도</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">트리플크라운</span><span class="fb">타율·홈런·타점 동시 1위</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">노히트노런</span><span class="fb">안타 0개 허용 완투</span></div></div></div><h4 class="gh">플레이 <small>8</small></h4><div class="flips"><div class="flip" tabindex="0"><div class="fi"><span class="ff">지명타자(DH)</span><span class="fb">타격만 하는 타자</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">희생번트</span><span class="fb">진루 위해 아웃 감수</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">희생플라이</span><span class="fb">외야 뜬공 주자 홈인</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">병살타</span><span class="fb">한 타구 아웃 2개</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">도루</span><span class="fb">투구 중 다음 루 진루</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">인필드 플라이</span><span class="fb">내야 뜬공 자동 아웃</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">보크</span><span class="fb">투수 규정 위반, 주자 1루 진루</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">체크스윙</span><span class="fb">스윙 인정 여부 판정</span></div></div></div><h4 class="gh">제도 <small>7</small></h4><div class="flips"><div class="flip" tabindex="0"><div class="fi"><span class="ff">FA</span><span class="fb">자유계약선수, 등록일수 충족</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">경쟁균형세(CBT)</span><span class="fb">연봉 총액 초과 시 세금</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">퓨처스(2군)</span><span class="fb">육성·재활 무대</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">드래프트</span><span class="fb">신인 지명 회의</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">와일드카드</span><span class="fb">4·5위 결정전</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">ABS</span><span class="fb">자동 볼·스트라이크 판정</span></div></div><div class="flip" tabindex="0"><div class="fi"><span class="ff">피치클락</span><span class="fb">투구 간 시간 제한</span></div></div></div>
+</section>
+<section id="history" class="sec">
+<h2 class="sec-title"><span class="no">07</span>KBO 역사와 레전드 기록</h2>
+<p class="lead">1982 · 6구단 → 10구단 · 1,277만 관중 🏟️</p>
+
+<h3>📜 연도별 타임라인</h3>
+<div class="tl-scroll"><svg class="tlsvg" viewBox="0 0 1200 200" role="img" aria-label="KBO 연도별 타임라인 1982~2026"><line x1="40" y1="100" x2="1160" y2="100" class="tl-line"/><line x1="70" y1="100" x2="70" y2="82" class="tl-line"/><circle cx="70" cy="100" r="7" class="tl-dot"/><text x="70" y="45" class="tl-y" text-anchor="middle">1982</text><text x="70" y="63" class="tl-t" text-anchor="middle">6개 구단 출범</text><line x1="166" y1="100" x2="166" y2="118" class="tl-line"/><circle cx="166" cy="100" r="7" class="tl-dot"/><text x="166" y="135" class="tl-y" text-anchor="middle">1985</text><text x="166" y="153" class="tl-t" text-anchor="middle">삼성 통합우승</text><line x1="262" y1="100" x2="262" y2="82" class="tl-line"/><circle cx="262" cy="100" r="7" class="tl-dot"/><text x="262" y="45" class="tl-y" text-anchor="middle">1986</text><text x="262" y="63" class="tl-t" text-anchor="middle">해태 4연속 우승</text><line x1="358" y1="100" x2="358" y2="118" class="tl-line"/><circle cx="358" cy="100" r="7" class="tl-dot"/><text x="358" y="135" class="tl-y" text-anchor="middle">1991</text><text x="358" y="153" class="tl-t" text-anchor="middle">빙그레 창단</text><line x1="454" y1="100" x2="454" y2="82" class="tl-line"/><circle cx="454" cy="100" r="7" class="tl-dot"/><text x="454" y="45" class="tl-y" text-anchor="middle">1994</text><text x="454" y="63" class="tl-t" text-anchor="middle">이종범 84도루</text><line x1="550" y1="100" x2="550" y2="118" class="tl-line"/><circle cx="550" cy="100" r="7" class="tl-dot"/><text x="550" y="135" class="tl-y" text-anchor="middle">1998</text><text x="550" y="153" class="tl-t" text-anchor="middle">외국인 제도</text><line x1="646" y1="100" x2="646" y2="82" class="tl-line"/><circle cx="646" cy="100" r="7" class="tl-dot"/><text x="646" y="45" class="tl-y" text-anchor="middle">2003</text><text x="646" y="63" class="tl-t" text-anchor="middle">이승엽 56홈런</text><line x1="742" y1="100" x2="742" y2="118" class="tl-line"/><circle cx="742" cy="100" r="7" class="tl-dot"/><text x="742" y="135" class="tl-y" text-anchor="middle">2008</text><text x="742" y="153" class="tl-t" text-anchor="middle">올림픽 금메달</text><line x1="838" y1="100" x2="838" y2="82" class="tl-line"/><circle cx="838" cy="100" r="7" class="tl-dot"/><text x="838" y="45" class="tl-y" text-anchor="middle">2013</text><text x="838" y="63" class="tl-t" text-anchor="middle">10구단 완성</text><line x1="934" y1="100" x2="934" y2="118" class="tl-line"/><circle cx="934" cy="100" r="7" class="tl-dot hot"/><text x="934" y="135" class="tl-y" text-anchor="middle">2024</text><text x="934" y="153" class="tl-t" text-anchor="middle">첫 1,088만</text><line x1="1030" y1="100" x2="1030" y2="82" class="tl-line"/><circle cx="1030" cy="100" r="7" class="tl-dot hot"/><text x="1030" y="45" class="tl-y" text-anchor="middle">2025</text><text x="1030" y="63" class="tl-t" text-anchor="middle">1,231만 신기록</text><line x1="1126" y1="100" x2="1126" y2="118" class="tl-line"/><circle cx="1126" cy="100" r="7" class="tl-dot hot"/><text x="1126" y="135" class="tl-y" text-anchor="middle">2026</text><text x="1126" y="153" class="tl-t" text-anchor="middle">1,277만 신기록</text></svg></div>
+<div class="grid g3">
+<div class="card"><div class="stat"><b class="num">6→10</b><span>구단 수 (1982→2015)</span></div></div>
+<div class="card"><div class="stat"><b class="num">144</b><span>경기 (2015~)</span></div></div>
+<div class="card"><div class="stat"><b class="num">1,277만</b><span>2026 관중</span></div></div>
+</div>
+
+<h3>🏅 통산 레전드</h3>
+<div class="grid g4"><div class="pcard t-samsung" role="img" aria-label="이승엽 통산 홈런 467"><svg viewBox="0 0 80 90" class="sil" aria-hidden="true"><circle cx="40" cy="22" r="11" fill="#f1d3b3"/><path d="M28 18a12 12 0 0 1 24 0z" fill="#fff" opacity=".9"/><path d="M50 17h12v3H50z" fill="#fff" opacity=".9"/><path d="M18 90c0-24 8-44 22-44s22 20 22 44z" fill="#fff" opacity=".92"/><path d="M30 50l10 8 10-8" stroke="var(--tc)" stroke-width="3" fill="none"/></svg><b class="pno">36</b><div class="pn">이승엽</div><div class="pt">삼성 라이온즈</div><div class="pbig">467</div><div class="pl">통산 홈런</div></div><div class="pcard t-lg" role="img" aria-label="박용택 통산 안타 2,504"><svg viewBox="0 0 80 90" class="sil" aria-hidden="true"><circle cx="40" cy="22" r="11" fill="#f1d3b3"/><path d="M28 18a12 12 0 0 1 24 0z" fill="#fff" opacity=".9"/><path d="M50 17h12v3H50z" fill="#fff" opacity=".9"/><path d="M18 90c0-24 8-44 22-44s22 20 22 44z" fill="#fff" opacity=".92"/><path d="M30 50l10 8 10-8" stroke="var(--tc)" stroke-width="3" fill="none"/></svg><b class="pno">33</b><div class="pn">박용택</div><div class="pt">LG 트윈스</div><div class="pbig">2,504</div><div class="pl">통산 안타</div></div><div class="pcard t-hanwha" role="img" aria-label="송진우 통산 승리 210승"><svg viewBox="0 0 80 90" class="sil" aria-hidden="true"><circle cx="40" cy="22" r="11" fill="#f1d3b3"/><path d="M28 18a12 12 0 0 1 24 0z" fill="#fff" opacity=".9"/><path d="M50 17h12v3H50z" fill="#fff" opacity=".9"/><path d="M18 90c0-24 8-44 22-44s22 20 22 44z" fill="#fff" opacity=".92"/><path d="M30 50l10 8 10-8" stroke="var(--tc)" stroke-width="3" fill="none"/></svg><b class="pno">21</b><div class="pn">송진우</div><div class="pt">한화 이글스</div><div class="pbig">210승</div><div class="pl">통산 승리</div></div><div class="pcard t-samsung" role="img" aria-label="오승환 통산 세이브 427"><svg viewBox="0 0 80 90" class="sil" aria-hidden="true"><circle cx="40" cy="22" r="11" fill="#f1d3b3"/><path d="M28 18a12 12 0 0 1 24 0z" fill="#fff" opacity=".9"/><path d="M50 17h12v3H50z" fill="#fff" opacity=".9"/><path d="M18 90c0-24 8-44 22-44s22 20 22 44z" fill="#fff" opacity=".92"/><path d="M30 50l10 8 10-8" stroke="var(--tc)" stroke-width="3" fill="none"/></svg><b class="pno">21</b><div class="pn">오승환</div><div class="pt">삼성 라이온즈</div><div class="pbig">427</div><div class="pl">통산 세이브</div></div></div>
+<h3>⚡ 단일시즌 기록</h3>
+<div class="bars" role="group" aria-label="단일시즌 레전드 기록"><div class="brow t-lg"><span class="bl">타율 · 백인천 '82</span><div class="bar" role="img" aria-label="타율 · 백인천 '82 .412"><i class="fill" style="--w:82%"></i></div><b class="bv">.412</b></div><div class="brow t-samsung"><span class="bl">홈런 · 이승엽 '03</span><div class="bar" role="img" aria-label="홈런 · 이승엽 '03 56"><i class="fill" style="--w:70%"></i></div><b class="bv">56</b></div><div class="brow t-kiwoom"><span class="bl">안타 · 서건창 '14</span><div class="bar" role="img" aria-label="안타 · 서건창 '14 201"><i class="fill" style="--w:80%"></i></div><b class="bv">201</b></div><div class="brow t-kia"><span class="bl">도루 · 이종범 '94</span><div class="bar" role="img" aria-label="도루 · 이종범 '94 84"><i class="fill" style="--w:84%"></i></div><b class="bv">84</b></div><div class="brow t-doosan"><span class="bl">승리 · 박철순 '82</span><div class="bar" role="img" aria-label="승리 · 박철순 '82 24"><i class="fill" style="--w:60%"></i></div><b class="bv">24</b></div><div class="brow t-samsung"><span class="bl">세이브 · 오승환 '11</span><div class="bar" role="img" aria-label="세이브 · 오승환 '11 47"><i class="fill" style="--w:78%"></i></div><b class="bv">47</b></div><div class="brow t-kiwoom"><span class="bl">탈삼진 · 안우진 '22</span><div class="bar" role="img" aria-label="탈삼진 · 안우진 '22 224"><i class="fill" style="--w:90%"></i></div><b class="bv">224</b></div></div>
+
+<h3>🏆 한국시리즈 우승 44회</h3>
+<div class="duo">
+<div class="donut-wrap"><svg viewBox="0 0 42 42" class="donut" role="img" aria-label="구단별 우승 횟수 도넛 합계 44회"><circle class="t-kia" cx="21" cy="21" r="15.915" fill="none" stroke="var(--tc)" stroke-width="7" stroke-dasharray="26.87 73.13" stroke-dashoffset="0.00"/><circle class="t-samsung" cx="21" cy="21" r="15.915" fill="none" stroke="var(--tc)" stroke-width="7" stroke-dasharray="17.78 82.22" stroke-dashoffset="-27.27"/><circle class="t-doosan" cx="21" cy="21" r="15.915" fill="none" stroke="var(--tc)" stroke-width="7" stroke-dasharray="13.24 86.76" stroke-dashoffset="-45.45"/><circle class="t-ssg" cx="21" cy="21" r="15.915" fill="none" stroke="var(--tc)" stroke-width="7" stroke-dasharray="10.96 89.04" stroke-dashoffset="-59.09"/><circle class="t-lg" cx="21" cy="21" r="15.915" fill="none" stroke="var(--tc)" stroke-width="7" stroke-dasharray="8.69 91.31" stroke-dashoffset="-70.45"/><circle class="t-kiwoom" cx="21" cy="21" r="15.915" fill="none" stroke="var(--tc)" stroke-width="7" stroke-dasharray="8.69 91.31" stroke-dashoffset="-79.55"/><circle class="t-lotte" cx="21" cy="21" r="15.915" fill="none" stroke="var(--tc)" stroke-width="7" stroke-dasharray="4.15 95.85" stroke-dashoffset="-88.64"/><circle class="t-hanwha" cx="21" cy="21" r="15.915" fill="none" stroke="var(--tc)" stroke-width="7" stroke-dasharray="1.87 98.13" stroke-dashoffset="-93.18"/><circle class="t-nc" cx="21" cy="21" r="15.915" fill="none" stroke="var(--tc)" stroke-width="7" stroke-dasharray="1.87 98.13" stroke-dashoffset="-95.45"/><circle class="t-kt" cx="21" cy="21" r="15.915" fill="none" stroke="var(--tc)" stroke-width="7" stroke-dasharray="1.87 98.13" stroke-dashoffset="-97.73"/><text x="21" y="22" text-anchor="middle" font-size="8" font-weight="800" fill="currentColor">44</text><text x="21" y="28" text-anchor="middle" font-size="3.5" fill="currentColor">우승</text></svg>
+<ul class="dleg"><li class="t-kia"><i></i>KIA 12</li><li class="t-samsung"><i></i>삼성 8</li><li class="t-doosan"><i></i>두산 6</li><li class="t-ssg"><i></i>SSG 5</li><li class="t-lg"><i></i>LG 4</li><li class="t-kiwoom"><i></i>키움 4</li><li class="t-lotte"><i></i>롯데 2</li><li class="t-hanwha"><i></i>한화 1</li><li class="t-nc"><i></i>NC 1</li><li class="t-kt"><i></i>kt 1</li></ul></div>
+<div class="bars" role="group" aria-label="구단별 우승 순위"><div class="brow t-kia"><span class="bl">KIA 타이거즈</span><div class="bar" role="img" aria-label="KIA 12회"><i class="fill" style="--w:100.0%"></i></div><b class="bv">12회</b></div><div class="brow t-samsung"><span class="bl">삼성 라이온즈</span><div class="bar" role="img" aria-label="삼성 8회"><i class="fill" style="--w:66.66666666666666%"></i></div><b class="bv">8회</b></div><div class="brow t-doosan"><span class="bl">두산 베어스</span><div class="bar" role="img" aria-label="두산 6회"><i class="fill" style="--w:50.0%"></i></div><b class="bv">6회</b></div><div class="brow t-ssg"><span class="bl">SSG 랜더스</span><div class="bar" role="img" aria-label="SSG 5회"><i class="fill" style="--w:41.66666666666667%"></i></div><b class="bv">5회</b></div><div class="brow t-lg"><span class="bl">LG 트윈스</span><div class="bar" role="img" aria-label="LG 4회"><i class="fill" style="--w:33.33333333333333%"></i></div><b class="bv">4회</b></div><div class="brow t-kiwoom"><span class="bl">키움 히어로즈</span><div class="bar" role="img" aria-label="키움 4회"><i class="fill" style="--w:33.33333333333333%"></i></div><b class="bv">4회</b></div><div class="brow t-lotte"><span class="bl">롯데 자이언츠</span><div class="bar" role="img" aria-label="롯데 2회"><i class="fill" style="--w:16.666666666666664%"></i></div><b class="bv">2회</b></div><div class="brow t-hanwha"><span class="bl">한화 이글스</span><div class="bar" role="img" aria-label="한화 1회"><i class="fill" style="--w:8.333333333333332%"></i></div><b class="bv">1회</b></div><div class="brow t-nc"><span class="bl">NC 다이노스</span><div class="bar" role="img" aria-label="NC 1회"><i class="fill" style="--w:8.333333333333332%"></i></div><b class="bv">1회</b></div><div class="brow t-kt"><span class="bl">kt wiz</span><div class="bar" role="img" aria-label="kt 1회"><i class="fill" style="--w:8.333333333333332%"></i></div><b class="bv">1회</b></div></div>
+</div>
+<div class="badges"><svg viewBox="0 0 40 40" class="badge t-kia" aria-hidden="true"><path d="M20 2l15 5v13c0 9-7 15-15 18C12 35 5 29 5 20V7z" fill="var(--tc)"/><path d="M9 14q6 6 0 12M31 14q-6 6 0 12" stroke="#fff" stroke-dasharray="2 2" fill="none" opacity=".7"/><text x="20" y="25" text-anchor="middle" font-size="12" font-weight="800" fill="#fff">K</text></svg><svg viewBox="0 0 40 40" class="badge t-samsung" aria-hidden="true"><path d="M20 2l15 5v13c0 9-7 15-15 18C12 35 5 29 5 20V7z" fill="var(--tc)"/><path d="M9 14q6 6 0 12M31 14q-6 6 0 12" stroke="#fff" stroke-dasharray="2 2" fill="none" opacity=".7"/><text x="20" y="25" text-anchor="middle" font-size="12" font-weight="800" fill="#fff">S</text></svg><svg viewBox="0 0 40 40" class="badge t-doosan" aria-hidden="true"><path d="M20 2l15 5v13c0 9-7 15-15 18C12 35 5 29 5 20V7z" fill="var(--tc)"/><path d="M9 14q6 6 0 12M31 14q-6 6 0 12" stroke="#fff" stroke-dasharray="2 2" fill="none" opacity=".7"/><text x="20" y="25" text-anchor="middle" font-size="12" font-weight="800" fill="#fff">D</text></svg><svg viewBox="0 0 40 40" class="badge t-lg" aria-hidden="true"><path d="M20 2l15 5v13c0 9-7 15-15 18C12 35 5 29 5 20V7z" fill="var(--tc)"/><path d="M9 14q6 6 0 12M31 14q-6 6 0 12" stroke="#fff" stroke-dasharray="2 2" fill="none" opacity=".7"/><text x="20" y="25" text-anchor="middle" font-size="12" font-weight="800" fill="#fff">LG</text></svg></div>
+<p class="note">현대 4회는 키움 별도 집계 · 2026 KS: kt vs 삼성</p>
+
+<h3>📈 관중 신기록</h3>
+<div class="duo">
+<svg viewBox="0 0 300 160" class="line" role="img" aria-label="관중 추이 2024 1,088만, 2025 1,231만, 2026 1,277만"><polyline points="40,120 150,60 260,40" fill="none" stroke="var(--neon,#39ff88)" stroke-width="3"/><g fill="var(--neon,#39ff88)"><circle cx="40" cy="120" r="5"/><circle cx="150" cy="60" r="5"/><circle cx="260" cy="40" r="6"/></g><g text-anchor="middle" font-size="13" fill="currentColor"><text x="40" y="108">1,088만</text><text x="150" y="48">1,231만</text><text x="260" y="28">1,277만</text><text x="40" y="148">2024</text><text x="150" y="148">2025</text><text x="260" y="148">2026</text></g></svg>
+<div class="grid g2"><div class="card"><div class="stat"><b class="num">8구단</b><span>100만 돌파·최초</span></div></div><div class="card"><div class="stat"><b class="num">5팀</b><span>PS: kt·삼성·KIA·LG·두산</span></div></div></div>
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+</main>
+
+<footer class="foot">KBO 2026 시즌 백과사전 · 팬이 만든 비공식 자료입니다. 수치는 집계 시점에 따라 달라질 수 있습니다.</footer>
+<button id="toTop" aria-label="맨 위로">▲</button>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* speed lines */
+  var g=$('#speedLines'),cols=['#ffd60a','#ff2e4d','#27a4ff','#ffffff'],h='';
+  for(var i=0;i<26;i++){
+    var y=Math.round(Math.random()*760-30),len=120+Math.random()*420,x=Math.random()*1400,w=(Math.random()*3+1).toFixed(1),d=(2.2+Math.random()*4).toFixed(1),dl=(-Math.random()*6).toFixed(1),c=cols[i%cols.length],o=(0.12+Math.random()*0.4).toFixed(2);
+    h+='<line x1="'+x+'" y1="'+y+'" x2="'+(x+len)+'" y2="'+y+'" stroke="'+c+'" stroke-width="'+w+'" opacity="'+o+'" style="animation-duration:'+d+'s;animation-delay:'+dl+'s"/>';
+  }
+  g.innerHTML=h;
+
+  /* count up */
+  function fmt(n,dec){return dec?n.toFixed(dec):Math.round(n).toLocaleString('ko-KR')}
+  function count(el){
+    if(el.__done)return;el.__done=1;
+    var raw=el.getAttribute('data-count'),to=parseFloat(raw),dec=(raw.split('.')[1]||'').length,
+        pre=el.getAttribute('data-prefix')||'',suf=el.getAttribute('data-suffix')||'';
+    if(isNaN(to))return;
+    if(reduce){el.textContent=pre+fmt(to,dec)+suf;return}
+    var t0=null,dur=1400;
+    (function step(t){if(!t0)t0=t;var p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=pre+fmt(to*e,dec)+suf;if(p<1)requestAnimationFrame(step)})(performance.now());
+  }
+  /* auto-wire: .stat .num without data-count but numeric text */
+  $$('.stat .num').forEach(function(el){
+    if(!el.hasAttribute('data-count')){
+      var m=el.textContent.trim().match(/^([^\d.\-]*)(-?[\d,]*\.?\d+)([^\d]*)$/);
+      if(m){el.setAttribute('data-prefix',m[1]);el.setAttribute('data-suffix',m[3]);el.setAttribute('data-count',m[2].replace(/,/g,''))}
+    }
+  });
+
+  /* reveal + count trigger */
+  $$('.card,.stat,.tl-item,.quote,.note,.sec-title,.lead,table.tbl,.grid>*').forEach(function(el){if(!el.closest('.hero'))el.classList.add('rv')});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('in');$$('[data-count]',e.target).forEach(count);if(e.target.hasAttribute&&e.target.hasAttribute('data-count'))count(e.target);io.unobserve(e.target)}
+    })},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    $$('.rv').forEach(function(el,i){el.style.transitionDelay=Math.min((i%4)*70,210)+'ms';io.observe(el)});
+    var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){count(e.target);io2.unobserve(e.target)}})},{threshold:.3});
+    $$('[data-count]').forEach(function(el){io2.observe(el)});
+  }else{$$('.rv').forEach(function(e){e.classList.add('in')});$$('[data-count]').forEach(count)}
+
+  /* scroll spy + progress + top */
+  var links=$$('nav.top .links a'),secs=links.map(function(a){return document.getElementById(a.getAttribute('href').slice(1))}),prog=$('#progress'),tt=$('#toTop');
+  function onScroll(){
+    var st=window.scrollY,dh=document.documentElement.scrollHeight-innerHeight;
+    prog.style.width=(dh>0?st/dh*100:0)+'%';
+    tt.classList.toggle('show',st>700);
+    var cur=-1,line=st+innerHeight*0.35;
+    secs.forEach(function(s,i){if(s&&s.offsetTop<=line)cur=i});
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur)});
+    if(cur>=0&&links[cur].scrollIntoView&&!reduce){var L=links[cur].parentNode;L.scrollLeft=links[cur].offsetLeft-L.clientWidth/2+links[cur].clientWidth/2}
+    $$('.timeline').forEach(function(t){var r=t.getBoundingClientRect(),p=(innerHeight*0.65-r.top)/r.height;t.style.setProperty('--prog',Math.max(0,Math.min(1,p))*100+'%')});
+  }
+  addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);onScroll();
+  tt.addEventListener('click',function(){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
+
+  /* search filter */
+  var q=$('#q'),cnt=$('#sCount'),items=null,timer;
+  function collect(){
+    items=[];
+    $$('.card').forEach(function(el){items.push({el:el,t:el.textContent.toLowerCase()})});
+    $$('table.tbl tbody tr').forEach(function(el){items.push({el:el,t:el.textContent.toLowerCase()})});
+    $$('.tl-item').forEach(function(el){items.push({el:el,t:el.textContent.toLowerCase()})});
+  }
+  function run(){
+    if(!items)collect();
+    var v=q.value.trim().toLowerCase(),shown=0;
+    items.forEach(function(it){
+      var ok=!v||it.t.indexOf(v)>-1;
+      it.el.classList.toggle('hide',!ok);
+      if(ok&&v)shown++;
+      if(ok)it.el.classList.add('in');
+    });
+    $$('.sec').forEach(function(s){
+      /* hide empty grids */
+      $$('.grid',s).forEach(function(gr){var any=$$('.card',gr).some(function(c){return !c.classList.contains('hide')});var has=$$('.card',gr).length>0;gr.classList.toggle('hide',has&&!any)});
+    });
+    if(v){cnt.style.display='block';cnt.textContent='“'+q.value.trim()+'” 일치 '+shown+'건'}else cnt.style.display='none';
+  }
+  q.addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(run,120)});
+  addEventListener('keydown',function(e){if(e.key==='/'&&document.activeElement!==q&&!/input|textarea/i.test(document.activeElement.tagName)){e.preventDefault();q.focus()}if(e.key==='Escape'&&document.activeElement===q){q.value='';run();q.blur()}});
+})();
+
+  /* bar fill reveal */
+  (function(){var t=document.querySelectorAll('.sec,.bar');
+    if('IntersectionObserver' in window){var b=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');b.unobserve(e.target)}})},{threshold:0,rootMargin:"0px 0px -5% 0px"});t.forEach(function(el){b.observe(el)})}
+    else t.forEach(function(el){el.classList.add('in')});})();
+</script>
+</body>
+</html>
